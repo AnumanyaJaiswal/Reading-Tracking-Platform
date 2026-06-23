@@ -16,7 +16,7 @@ function Sidebar() {
     { name: "Home", icon: House, path: "/home" },
     { name: "Clubs", icon: Users, path: "/clubs_public" },
     { name: "Search", icon: Search, path: "/search" },
-    { name: "Profile", icon: UserRound, path: "/profile" },
+    { name: "My Profile", icon: UserRound, path: "/profile" },
   ];
   return (
     <aside
