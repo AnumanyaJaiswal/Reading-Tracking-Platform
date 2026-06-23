@@ -1,7 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../Context/AuthContext'
 
 function Signup() {
+
+    const navigate = useNavigate();
+    const { register } = useAuth();
+    const [username , setUsername] = useState('');
+    const [email , setEmail] = useState('');
+    const [password , setPassword] = useState('');
+
+    const handleSubmit = async(e)=>{
+        e.preventDefault();
+        try {
+            await register({
+                username,
+                email,
+                password
+            })
+            navigate('/profile');
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div
             className="
@@ -62,7 +85,7 @@ function Signup() {
 
                 </div>
 
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={handleSubmit}>
 
                     <div>
                         <label
@@ -78,8 +101,11 @@ function Signup() {
                         </label>
 
                         <input
+                            required
                             type="text"
                             id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             className="
                             w-full
                             px-4
@@ -111,8 +137,11 @@ function Signup() {
                         </label>
 
                         <input
+                            required
                             type="email"
                             id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="
                             w-full
                             px-4
@@ -144,8 +173,11 @@ function Signup() {
                         </label>
 
                         <input
+                            required
                             type="password"
                             id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="
                             w-full
                             px-4
