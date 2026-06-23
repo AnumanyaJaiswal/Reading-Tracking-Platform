@@ -1,7 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React , {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../Context/AuthContext'
+
 
 function Login() {
+    const navigate = useNavigate()
+    const { login } = useAuth()
+
+    const [email , setEmail] = useState('');
+    const [password , setPassword] = useState('');
+
+    const handleSubmit = async(e)=>{
+        e.preventDefault();
+        try {
+            await login({
+                email,
+                password
+            })
+            navigate('/profile')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         
         <div className="
@@ -54,7 +75,7 @@ function Login() {
                     </p>
                 </div>
 
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={handleSubmit}>
 
                     <div>
                         <label
@@ -72,6 +93,8 @@ function Login() {
                         <input
                             type="email"
                             id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="
                                 w-full
                                 px-4
@@ -105,6 +128,8 @@ function Login() {
                         <input
                             type="password"
                             id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="
                                 w-full
                                 px-4
@@ -123,6 +148,7 @@ function Login() {
                     </div>
 
                     <button
+                        type='submit'
                         className="
                             w-full
                             py-3
