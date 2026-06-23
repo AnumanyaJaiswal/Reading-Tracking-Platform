@@ -28,7 +28,7 @@ function Footer() {
               text-3xl
               font-serif
               font-bold
-              bg-gradient-to-r
+              bg-linear-to-r
               from-[#B08DFF]
               via-[#F6B6D1]
               to-[#E7C66D]
