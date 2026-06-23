@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Components from './index.js'
-import { Route , Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,39 +10,41 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element= {<Components.GetStarted />}  
+          element={<Components.GetStarted />}
         />
-        <Route 
+        <Route
           path='/signup'
-          element= {<Components.Signup />}
+          element={<Components.Signup />}
         />
-        <Route 
+        <Route
           path='/login'
-          element= {<Components.Login />}
+          element={<Components.Login />}
         />
-        <Route 
-          path='/profile'
-          element= {<Components.Profile />}
-        />
+        <Route path="/profile" element={<Components.ProfileLayout />}>
+          <Route index element={<Components.Stats />} />
+          <Route path="stats" element={<Components.Stats />} />
+          <Route path="lists" element={<Components.Lists />} />
+          <Route path="reviews" element={<Components.Reviews />} />
+          <Route path="clubs" element={<Components.Clubs />} />
+        </Route>
 
-        <Route 
+        <Route
           path='/home'
-          element= {<Components.Home />}
+          element={<Components.Home />}
         />
 
-        <Route 
+        <Route
           path='/search'
-          element= {<Components.Search />}
+          element={<Components.Search />}
         />
 
-        <Route 
+        <Route
           path='/clubs_public'
-          element= {<Components.Clubs_Public />}
+          element={<Components.Clubs_Public />}
         />
 
       </Routes>
-      
-      
+
     </>
   )
 }
