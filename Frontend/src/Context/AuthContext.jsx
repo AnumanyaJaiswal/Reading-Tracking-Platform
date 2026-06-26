@@ -24,7 +24,11 @@ export function AuthProvider({ children }) {
     const register = async (userData) => {
         try {
             setLoading(true);
-            setUser(userData)
+            setUser({
+                id: 1,
+                username: userData.username,
+                email: userData.email,
+            });
         } catch (error) {
             console.log(error);
         } finally {
