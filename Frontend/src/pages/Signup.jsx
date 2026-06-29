@@ -1,27 +1,32 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../Context/AuthContext'
 
 function Signup() {
 
     const navigate = useNavigate();
-    const { register } = useAuth();
-    const [username , setUsername] = useState('');
-    const [email , setEmail] = useState('');
-    const [password , setPassword] = useState('');
+    const { register, loading } = useAuth();
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState("");
 
-    const handleSubmit = async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            setError("");
+
             await register({
-                username,
-                email,
-                password
-            })
+                username: username.trim(),
+                email: email.trim(),
+                password,
+            });
             navigate('/profile');
-            
+
         } catch (error) {
-            console.log(error)
+
+            setError(error.message);
+
         }
     }
 
@@ -195,7 +200,16 @@ function Signup() {
                         />
                     </div>
 
+                    {error && (
+                        <p className="text-red-500 text-sm text-center">
+                            {error}
+                        </p>
+                    )}
+
                     <button
+                        type="submit"
+                        disabled={loading}
+
                         className="
                         w-full
                         py-3
@@ -211,7 +225,7 @@ function Signup() {
                         to-[#E7C66D]
                     "
                     >
-                        ✦ Begin Your Journey
+                        {loading ? "Creating Account..." : "✦ Begin Your Journey"}
                     </button>
 
                 </form>

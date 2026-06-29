@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Components from './index.js'
 import { Route, Routes } from 'react-router-dom'
+import PublicRoute from './Components/PublicRoute.jsx'
+import PrivateRoute from './Components/PrivateRoute.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,17 +12,17 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<Components.GetStarted />}
+          element={<PublicRoute><Components.GetStarted /></PublicRoute>}
         />
         <Route
           path='/signup'
-          element={<Components.Signup />}
+          element={<PublicRoute><Components.Signup /></PublicRoute>}
         />
         <Route
           path='/login'
-          element={<Components.Login />}
+          element={<PublicRoute><Components.Login /></PublicRoute>}
         />
-        <Route path="/profile" element={<Components.ProfileLayout />}>
+        <Route path="/profile" element={<PrivateRoute><Components.ProfileLayout /></PrivateRoute>}>
           <Route index element={<Components.Stats />} />
           <Route path="stats" element={<Components.Stats />} />
           <Route path="lists" element={<Components.Lists />} />
@@ -30,17 +32,17 @@ function App() {
 
         <Route
           path='/home'
-          element={<Components.Home />}
+          element={<PrivateRoute><Components.Home /></PrivateRoute>}
         />
 
         <Route
           path='/search'
-          element={<Components.Search />}
+          element={<PrivateRoute><Components.Search /></PrivateRoute>}
         />
 
         <Route
           path='/clubs_public'
-          element={<Components.Clubs_Public />}
+          element={<PrivateRoute><Components.Clubs_Public /></PrivateRoute>}
         />
 
       </Routes>

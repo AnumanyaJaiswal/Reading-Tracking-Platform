@@ -1,30 +1,39 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../Context/AuthContext'
 
 
 function Login() {
     const navigate = useNavigate()
-    const { login } = useAuth()
+    const { login, loading } = useAuth()
 
-    const [email , setEmail] = useState('');
-    const [password , setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState("");
 
-    const handleSubmit = async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
+
+            setError("");
+
             await login({
-                email,
-                password
-            })
-            navigate('/profile')
+                email: email.trim(),
+                password,
+            });
+
+            navigate("/profile");
+
         } catch (error) {
-            console.log(error);
+
+            setError(error.message);
+
         }
-    }
+    };
 
     return (
-        
+
         <div className="
             min-h-screen
             flex
@@ -91,6 +100,7 @@ function Login() {
                         </label>
 
                         <input
+                            required
                             type="email"
                             id="email"
                             value={email}
@@ -126,6 +136,7 @@ function Login() {
                         </label>
 
                         <input
+                            required
                             type="password"
                             id="password"
                             value={password}
@@ -146,9 +157,17 @@ function Login() {
                             "
                         />
                     </div>
+                    {
+                        error && (
+                            <p className="text-red-500 text-sm text-center">
+                                {error}
+                            </p>
+                        )
+                    }
 
                     <button
                         type='submit'
+                        disabled={loading}
                         className="
                             w-full
                             py-3
@@ -163,7 +182,11 @@ function Login() {
                             to-[#E7C66D]
                         "
                     >
-                        ✦ Return to Prophecy
+                        {
+                            loading
+                                ? "Entering Prophecy..."
+                                : "✦ Return to Prophecy"
+                        }
                     </button>
 
                 </form>
