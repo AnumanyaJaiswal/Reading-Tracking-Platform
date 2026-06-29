@@ -18,6 +18,40 @@ model User {
   email     String   @unique
   password  String
 
+  books      UserBook[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model UserBook {
+
+  id           String   @id @default(cuid())
+
+  googleBookId String
+  title        String
+  authors      String[]
+  thumbnail    String?
+
+  pageCount    Int?
+  categories   String[]
+
+  status       ReadingStatus
+
+  rating       Int?
+  review       String? @db.Text
+
+  finishedAt   DateTime?
+
+  userId       String
+  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum ReadingStatus {
+  WANT_TO_READ
+  CURRENTLY_READING
+  FINISHED
 }

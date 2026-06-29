@@ -1,4 +1,4 @@
-npx prisma --versionimport React from 'react'
+import React from "react"
 
 function Reviews() {
   return (
