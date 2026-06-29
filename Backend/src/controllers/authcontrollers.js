@@ -44,10 +44,28 @@ const registerUser = async (req, res) => {
             }
         })
 
+        const token = jwt.sign(
+            {
+                id: user.id,
+                username: user.username,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "7d",
+            }
+        );
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
         //Success Status
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
-            message: 'Login route working',
+            message: 'User Registered Successfully',
             user: {
                 id: user.id,
                 username: user.username,
@@ -126,13 +144,17 @@ const loginUser = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Login Successful"
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email,
+            }
         });
 
     } catch (error) {
-        res.status(200).json({
-            success: true,
-            message: 'Login route working',
+        return res.status(500).json({
+            success: false,
+            message: error.message,
         });
     }
 
@@ -174,7 +196,7 @@ const getCurrentUser = async (req, res) => {
     }
 }
 
-const logoutUser = async(req, res) =>{
+const logoutUser = async (req, res) => {
     res.clearCookie("token");
 
     return res.status(200).json({

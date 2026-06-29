@@ -1,21 +1,29 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+    signupUser,
+    loginUser,
+    logoutUser,
+    getCurrentUser,
+} from "../services/auth.service";
+
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const login = async (credentials) => {
         try {
-            setLoading(true)
+            setLoading(true);
+            const data = await loginUser(credentials);
 
-            setUser({
-                id: 1,
-                username: "Demo User",
-                email: credentials.email,
-            })
+            setUser(data.user);
+
+            return data;
         } catch (error) {
-            console.log(error)
+            throw error;
         } finally {
             setLoading(false)
         }
@@ -24,21 +32,38 @@ export function AuthProvider({ children }) {
     const register = async (userData) => {
         try {
             setLoading(true);
-            setUser({
-                id: 1,
-                username: userData.username,
-                email: userData.email,
-            });
+            const data = await signupUser(userData);
+            setUser(data.user);
+            return data;
         } catch (error) {
-            console.log(error);
+            throw error;
         } finally {
             setLoading(false)
         }
     }
 
-    const logout = () => {
-        setUser(null);
+    const logout = async () => {
+        try {
+            await logoutUser();
+            setUser(null);
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const data = await getCurrentUser();
+                setUser(data.user);
+            } catch (error) {
+                setUser(null);
+            }
+        };
+
+        checkAuth();
+    }, []);
 
     const value = {
         user,

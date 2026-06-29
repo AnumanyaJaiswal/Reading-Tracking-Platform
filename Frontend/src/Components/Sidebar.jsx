@@ -8,6 +8,8 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react";
+import { useAuth } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -18,6 +20,18 @@ function Sidebar() {
     { name: "Search", icon: Search, path: "/search" },
     { name: "My Profile", icon: UserRound, path: "/profile" },
   ];
+
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <aside
       className="
@@ -62,37 +76,38 @@ function Sidebar() {
       {/* Navigation */}
 
       <ul className="space-y-3">
-        {menuItems.map((item) =>(
-          
+        {menuItems.map((item) => (
+
           <li key={item.path}>
             <NavLink
               to={item.path}
               className={({ isActive }) =>
-            `
+                `
             flex items-center gap-3
             px-4 py-3
             rounded-2xl
             transition-all duration-200
-            ${
-              isActive
-                ? "bg-[#FDF2F8] text-[#4C3D63] font-medium"
-                : "text-[#6B5A7A] hover:bg-[#FDF2F8]"
-            }
+            ${isActive
+                  ? "bg-[#FDF2F8] text-[#4C3D63] font-medium"
+                  : "text-[#6B5A7A] hover:bg-[#FDF2F8]"
+                }
           `
-          }
+              }
             >
-            <item.icon size={20} />
-            {item.name}
+              <item.icon size={20} />
+              {item.name}
             </NavLink>
           </li>
         ))}
 
       </ul>
 
+
       {/* Logout */}
 
       <div className="mt-auto">
         <button
+          onClick={handleLogout}
           className="
             w-full
             flex items-center gap-3
