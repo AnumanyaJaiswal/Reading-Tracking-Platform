@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<PublicRoute><Components.GetStarted /></PublicRoute>}
+          element={<Components.GetStarted />}
         />
         <Route
           path='/signup'
@@ -43,6 +43,16 @@ function App() {
         <Route
           path='/clubs_public'
           element={<PrivateRoute><Components.Clubs_Public /></PrivateRoute>}
+        />
+
+        <Route
+          path='/clubs_public'
+          element={<PrivateRoute><Components.Clubs_Public /></PrivateRoute>}
+        />
+
+        <Route
+          path='/books/:id'
+          element={<PrivateRoute><Components.BookDetails /></PrivateRoute>}
         />
 
       </Routes>

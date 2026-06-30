@@ -9,6 +9,7 @@ import Clubs from './pages/Profile/Clubs_Personal'
 import Search from './pages/Search'
 import Clubs_Public from './pages/Clubs_Public'
 import Home from './pages/Home'
+import BookDetails from './pages/BookDetails'
 
 export default{
     GetStarted,
@@ -21,5 +22,6 @@ export default{
     Clubs,
     Search,
     Home,
-    Clubs_Public
+    Clubs_Public,
+    BookDetails
 }

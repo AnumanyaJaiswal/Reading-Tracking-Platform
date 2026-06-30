@@ -1,80 +1,48 @@
-import React from "react";
-import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-function BookCard({ image, title, author, rating }) {
+function BookCard({ book }) {
+  const navigate = useNavigate();
+
   return (
     <div
+      onClick={() => {
+        console.log(book.id);
+        navigate(`/books/${book.id}`);
+      }}
       className="
-        bg-white
-        rounded-3xl
-        border border-[#F0E5FF]
-        overflow-hidden
-        shadow-[0_10px_30px_rgba(176,141,255,0.08)]
-        hover:-translate-y-2
-        hover:shadow-[0_20px_40px_rgba(176,141,255,0.15)]
-        transition-all
-        duration-300
-        cursor-pointer
-        w-64
-      "
+                bg-white
+                rounded-3xl
+                shadow-lg
+                hover:shadow-2xl
+                hover:-translate-y-2
+                transition-all
+                duration-300
+                cursor-pointer
+                overflow-hidden
+                border border-purple-100
+            "
     >
-      {/* Book Cover */}
-      <div className="h-80 overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          className="
-            w-full
-            h-full
-            object-cover
-            hover:scale-105
-            transition-transform
-            duration-500
-          "
-        />
-      </div>
+      <img
+        src={
+          book.thumbnail ||
+          "https://via.placeholder.com/200x300?text=No+Cover"
+        }
+        alt={book.title}
+        className="w-full h-72 object-cover"
+      />
 
-      {/* Content */}
       <div className="p-5">
-        <h3
-          className="
-            text-lg
-            font-semibold
-            text-[#4C3D63]
-            line-clamp-2
-          "
-        >
-          {title}
-        </h3>
 
-        <p
-          className="
-            mt-2
-            text-sm
-            text-[#6B5A7A]
-          "
-        >
-          {author}
+        <h2 className="font-bold text-lg text-[#4C3D63] line-clamp-2">
+          {book.title}
+        </h2>
+
+        <p className="text-gray-600 mt-2">
+          {book.authors?.join(", ")}
         </p>
 
-        <div className="mt-4 flex items-center gap-2">
-          <Star
-            size={16}
-            fill="#E7C66D"
-            color="#E7C66D"
-          />
-
-          <span
-            className="
-              text-sm
-              font-medium
-              text-[#4C3D63]
-            "
-          >
-            {rating}
-          </span>
-        </div>
       </div>
+
     </div>
   );
 }
