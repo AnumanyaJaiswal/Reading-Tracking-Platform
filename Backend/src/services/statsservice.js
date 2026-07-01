@@ -93,10 +93,10 @@ const getStats = async (userId) => {
             .sort((a, b) => b.count - a.count)
 
     return {
-        totalBooks,
-        wantToRead,
-        currentlyReading,
-        finished,
+        totalBooks: totalBooks.length,
+        wantToRead: wantToRead.length,
+        currentlyReading: currentlyReading.length,
+        finished: finished.length,
         avgRating: avgRating._avg.rating || 0,
         totalPagesRead: totalPagesRead._sum.pageCount || 0,
         booksFinishedThisYear,

@@ -17,7 +17,6 @@ const addToList = async ({
             googleBookId
         }
     });
-
     // if book exists then just update its status
     if (existingBook) {
         return prisma.userBook.update({

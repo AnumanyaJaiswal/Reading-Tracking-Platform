@@ -112,7 +112,7 @@ function BookDetails() {
                                 {/* Left */}
 
                                 <div className="w-full">
-                                    <div className="aspect-[2/3] w-full max-w-[320px] mx-auto rounded-2xl overflow-hidden shadow-xl shadow-[#4C3D63]/15 border border-purple-100">
+                                    <div className="aspect-2/3 w-full max-w-[320px] mx-auto rounded-2xl overflow-hidden shadow-xl shadow-[#4C3D63]/15 border border-purple-100">
                                         <BookCover
                                             thumbnail={book.thumbnail}
                                             title={book.title}

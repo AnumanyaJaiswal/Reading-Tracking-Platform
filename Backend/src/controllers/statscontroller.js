@@ -1,4 +1,3 @@
-const { get } = require('../routes/statsroute');
 const { getStats } = require('../services/statsservice');
 
 const getStatsController = async(req, res) =>{
