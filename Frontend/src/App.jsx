@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Components from './index.js'
 import { Route, Routes } from 'react-router-dom'
-import PublicRoute from './Components/PublicRoute.jsx'
-import PrivateRoute from './Components/PrivateRoute.jsx'
+import PublicRoute from './routes/PublicRoute.jsx'
+import PrivateRoute from './routes/PrivateRoute.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,11 +38,6 @@ function App() {
         <Route
           path='/search'
           element={<PrivateRoute><Components.Search /></PrivateRoute>}
-        />
-
-        <Route
-          path='/clubs_public'
-          element={<PrivateRoute><Components.Clubs_Public /></PrivateRoute>}
         />
 
         <Route

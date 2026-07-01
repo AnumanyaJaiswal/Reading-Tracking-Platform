@@ -50,25 +50,39 @@ function Search() {
   };
   return (
     <div>
-      <div className="flex flex-1">
+      <div className="flex flex-1 ml-72">
         <Sidebar />
-        <div className="min-h-screen bg-[#FFFDF8] px-10 py-10">
+        <div className="min-h-screen w-full bg-linear-to-b from-[#FFFDF8] via-[#FBF7EF] to-[#F6EFE3] px-12 py-14">
 
-          <h1 className="text-5xl text-center font-bold text-[#4C3D63] mb-10">
-            ✨ Search the Library ✨
-          </h1>
+          <div className="max-w-5xl mx-auto">
 
-          <SearchBar
-            query={query}
-            setQuery={setQuery}
-            onSearch={handleSearch}
-          />
+            <div className="text-center mb-12">
+              <h1 className="text-5xl font-extrabold tracking-tight text-[#4C3D63] mb-3 drop-shadow-sm">
+                ✨ Search the Library ✨
+              </h1>
+              <p className="text-[#8A7B9E] text-lg font-medium">
+                Discover your next favorite read
+              </p>
+            </div>
 
-          <h2 className="mt-12 text-3xl text-[#4C3D63]">
-            {query ? "Search Results" : "✨ Trending Tomes"}
-          </h2>
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg shadow-[#4C3D63]/5 border border-[#E8DFF2] p-6 mb-10">
+              <SearchBar
+                query={query}
+                setQuery={setQuery}
+                onSearch={handleSearch}
+              />
+            </div>
 
-          <BookGrid books={books} />
+            <div className="flex items-center gap-3 mb-8">
+              <h2 className="text-3xl font-bold text-[#4C3D63]">
+                {query ? "Search Results" : "✨ Trending Tomes"}
+              </h2>
+              <div className="flex-1 h-px bg-linear-to-r from-[#D8C9E8] to-transparent" />
+            </div>
+
+            <BookGrid books={books} />
+
+          </div>
 
         </div>
 

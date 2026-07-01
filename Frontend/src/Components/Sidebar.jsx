@@ -42,6 +42,9 @@ function Sidebar() {
         shadow-[0_10px_30px_rgba(176,141,255,0.08)]
         p-6
         flex flex-col
+        fixed
+        top-0
+        left-0
       "
     >
       {/* Logo */}

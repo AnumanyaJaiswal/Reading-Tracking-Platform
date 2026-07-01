@@ -1,22 +1,23 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+import Loader from "../Components/Loader";
 
-function PublicRoute({ children }) {
+function PrivateRoute({ children }) {
     const { isAuthenticated, loading } = useAuth();
 
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                Loading...
+                <Loader />
             </div>
         );
     }
 
-    if (isAuthenticated) {
-        return <Navigate to="/profile" replace />;
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
     }
 
     return children;
-}
+}       
 
-export default PublicRoute;
+export default PrivateRoute;

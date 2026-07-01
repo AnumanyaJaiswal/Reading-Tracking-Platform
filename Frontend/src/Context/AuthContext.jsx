@@ -11,7 +11,7 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const login = async (credentials) => {
@@ -53,17 +53,19 @@ export function AuthProvider({ children }) {
     }
 
     useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const data = await getCurrentUser();
-                setUser(data.user);
-            } catch (error) {
-                setUser(null);
-            }
-        };
+    const checkAuth = async () => {
+        try {
+            const data = await getCurrentUser();
+            setUser(data.user);
+        } catch (error) {
+            setUser(null);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        checkAuth();
-    }, []);
+    checkAuth();
+}, []);
 
     const value = {
         user,

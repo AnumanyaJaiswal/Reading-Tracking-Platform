@@ -6,7 +6,7 @@ function Footer() {
       className="
         bg-[#FDF2F8]
         border-t border-[#F0E5FF]
-        mt-20
+        ml-72
       "
     >
       <div
