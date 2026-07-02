@@ -68,28 +68,28 @@ const getStats = async (userId) => {
         },
     });
 
-    // Genre BreakDown
+    // author BreakDown
     const books = await prisma.userBook.findMany({
         where: {
             userId,
             status: "FINISHED"
         },
         select:{
-            categories: true
+            authors: true
         }
     })
 
-    const genreBraeakdown = {}
+    const authorsBreakdown = {}
     books.forEach((book) => {
-        book.categories.forEach((genre) =>{
-            genreBraeakDown[genre] = (genreBraeakDown[genre] || 0) + 1;
+        book.authors.forEach((author) =>{
+            authorsBreakdown[author] = (authorsBreakdown[author] || 0) + 1;
         })
     })
 
-    const genreBraeakdownArray = Object.entries(genreBraeakdown)
-            .map(([genre, count]) =>{
-                genre, count
-            })
+    const authorsBreakdownArray = Object.entries(authorsBreakdown)
+            .map(([author, count]) =>({
+                author, count
+            }))
             .sort((a, b) => b.count - a.count)
 
     return {
@@ -100,7 +100,7 @@ const getStats = async (userId) => {
         avgRating: avgRating._avg.rating || 0,
         totalPagesRead: totalPagesRead._sum.pageCount || 0,
         booksFinishedThisYear,
-        genreBraeakdown: genreBraeakdownArray
+        authorsBreakdown: authorsBreakdownArray
     };
 }
 

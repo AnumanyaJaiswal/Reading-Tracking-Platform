@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { BookOpen } from "lucide-react";
-import LibraryBookCard from "./LibraryBookCard";
+import BookCard from "./BookCard";
 
 function LibrarySection({ title, books = [] }) {
   return (
@@ -64,7 +64,7 @@ function LibrarySection({ title, books = [] }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.05 }}
             >
-              <LibraryBookCard book={book} />
+              <BookCard book={book} />
             </motion.div>
           ))}
         </div>

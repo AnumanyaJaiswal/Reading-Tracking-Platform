@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 function BookCard({ book }) {
   const navigate = useNavigate();
   const hasCover = Boolean(book.thumbnail);
+  const bookId = book.googleBookId || book.id;
 
   return (
     <div
-      onClick={() => navigate(`/books/${book.id}`)}
+      onClick={() => navigate(`/books/${bookId}`)}
       className="
         group
         bg-white

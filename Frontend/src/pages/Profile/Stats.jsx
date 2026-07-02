@@ -9,7 +9,7 @@ import {
   Calendar,
 } from "lucide-react";
 import StatCard from '../../Components/StatCard';
-import GenreBreakdown from '../../Components/GenreBreakdown';
+import AuthorsBreakdown from '../../Components/AuthorsBreakdown';
 
 function Stats() {
 
@@ -82,9 +82,7 @@ function Stats() {
       </div>
 
       <div className="mt-10">
-        <GenreBreakdown
-          genres={stats.genreBreakdown}
-        />
+        <AuthorsBreakdown authors={stats.authorsBreakdown} />
       </div>
     </div>
   )
