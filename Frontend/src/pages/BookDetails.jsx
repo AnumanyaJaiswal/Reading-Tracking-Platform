@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 import Sidebar from "../Components/Sidebar";
 import Footer from "../Components/Footer";
@@ -13,6 +14,7 @@ import { getBookById } from "../services/books";
 
 function BookDetails() {
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [book, setBook] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -75,6 +77,24 @@ function BookDetails() {
                     <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E0EBFA] rounded-full blur-[120px] opacity-30 pointer-events-none" />
 
                     <main className="relative z-10 px-12 py-12">
+
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="
+                                flex items-center gap-2
+                                mb-8
+                                px-4 py-2
+                                rounded-2xl
+                                bg-[#B08DFF]
+                              text-white
+                                font-semibold
+                                hover:scale-105
+                                transition
+                            "
+                        >
+                            <ArrowLeft size={18} />
+                            Return
+                        </button>
 
                         {/* Page Heading */}
 
