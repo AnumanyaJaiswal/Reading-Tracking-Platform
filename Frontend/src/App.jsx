@@ -23,7 +23,7 @@ function App() {
           element={<PublicRoute><Components.Login /></PublicRoute>}
         />
         <Route path="/profile" element={<PrivateRoute><Components.ProfileLayout /></PrivateRoute>}>
-          <Route index element={<Components.Stats />} />
+          <Route element={<Components.Stats />} />
           <Route path="stats" element={<Components.Stats />} />
           <Route path="lists" element={<Components.Lists />} />
           <Route path="reviews" element={<Components.Reviews />} />
