@@ -110,7 +110,6 @@ const loginUser = async (req, res) => {
                 message: "User not found"
             })
         }
-
         //Comapre Password
         const isMatch = await bcrypt.compare(
             password, user.password
@@ -122,7 +121,6 @@ const loginUser = async (req, res) => {
                 message: "Invalid credentials"
             })
         }
-
         // Generate JWT Tokens
         const token = jwt.sign(
             {
@@ -134,7 +132,6 @@ const loginUser = async (req, res) => {
                 expiresIn: '7d'
             }
         )
-
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production" || false,

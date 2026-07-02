@@ -15,7 +15,6 @@ const authmiddleware = (req, res , next) =>{
         //Verification of token through secret key
         const decode = jwt.verify(token , process.env.JWT_SECRET);
         req.user = decode;
-
         next();
 
     } catch (error) {

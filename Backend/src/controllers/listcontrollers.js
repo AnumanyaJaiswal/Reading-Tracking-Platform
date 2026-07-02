@@ -6,7 +6,6 @@ const addToListController = async (req, res) => {
 
         // taking all information from frontend
         const userId = req.user.id;
-
         const {
             googleBookId,
             title,
@@ -40,7 +39,6 @@ const addToListController = async (req, res) => {
             categories,
             status,
         })
-        console.log(book)
         return res.status(200).json({
             success: true,
             message: "Book Added Successfully",
