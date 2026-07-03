@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookMarked } from "lucide-react";
+import { motion } from "framer-motion";
 
 import Sidebar from "../Components/Sidebar";
 import Footer from "../Components/Footer";
@@ -32,6 +33,7 @@ function BookDetails() {
         };
 
         fetchBook();
+        window.scrollTo(0, 0);
     }, [id]);
 
     if (loading) {
@@ -62,10 +64,15 @@ function BookDetails() {
         );
     }
 
+    // optional meta chips — only render the ones the book actually has
+    const metaChips = [
+        book.publishedDate && book.publishedDate.slice(0, 4),
+        book.pageCount && `${book.pageCount} pages`,
+        book.categories?.length && book.categories[0],
+    ].filter(Boolean);
+
     return (
         <div>
-
-
             <div className="flex">
                 <Sidebar />
 
@@ -76,30 +83,50 @@ function BookDetails() {
                     <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#FCE4F0] rounded-full blur-[120px] opacity-40 pointer-events-none" />
                     <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E0EBFA] rounded-full blur-[120px] opacity-30 pointer-events-none" />
 
-                    <main className="relative z-10 px-12 py-12">
+                    <main className="relative z-10 px-12 py-10">
 
-                        <button
-                            onClick={() => navigate(-1)}
-                            className="
-                                flex items-center gap-2
-                                mb-8
-                                px-4 py-2
-                                rounded-2xl
-                                bg-[#B08DFF]
-                              text-white
-                                font-semibold
-                                hover:scale-105
-                                transition
-                            "
-                        >
-                            <ArrowLeft size={18} />
-                            Return
-                        </button>
+                        {/* Top bar: back button + subtle breadcrumb */}
+                        <div className="flex items-center justify-between mb-10">
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="
+                                    group
+                                    flex items-center gap-2
+                                    px-4 py-2
+                                    rounded-2xl
+                                    bg-white/70
+                                    backdrop-blur-md
+                                    border border-[#EFE5FF]
+                                    text-[#4C3D63]
+                                    font-semibold
+                                    text-sm
+                                    shadow-sm
+                                    hover:bg-white
+                                    hover:shadow-md
+                                    transition-all
+                                    duration-200
+                                "
+                            >
+                                <ArrowLeft
+                                    size={16}
+                                    className="group-hover:-translate-x-0.5 transition-transform duration-200"
+                                />
+                                Back
+                            </button>
+
+                            <div className="flex items-center gap-1.5 text-xs font-medium text-[#B08DFF] uppercase tracking-widest">
+                                <BookMarked size={13} />
+                                Book Details
+                            </div>
+                        </div>
 
                         {/* Page Heading */}
-
-                        <div className="text-center mb-12">
-
+                        <motion.div
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="text-center mb-12"
+                        >
                             <h1 className="text-5xl font-bold text-[#4C3D63] drop-shadow-sm">
                                 📖 Enchanted Tome
                             </h1>
@@ -107,42 +134,75 @@ function BookDetails() {
                             <p className="mt-3 text-lg text-[#7C6A9A]">
                                 Every story is a constellation waiting to be explored.
                             </p>
-
-                        </div>
+                        </motion.div>
 
                         {/* Main Card */}
-
-                        <div
+                        <motion.div
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
                             className="
-                        max-w-6xl
-                        mx-auto
-                        bg-white/60
-                        backdrop-blur-xl
-                        rounded-[40px]
-                        shadow-2xl
-                        shadow-[#4C3D63]/10
-                        border
-                        border-white/80
-                        p-10
-                        "
+                                max-w-6xl
+                                mx-auto
+                                bg-white/60
+                                backdrop-blur-xl
+                                rounded-[40px]
+                                shadow-2xl
+                                shadow-[#4C3D63]/10
+                                border
+                                border-white/80
+                                p-10
+                            "
                         >
 
                             <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-16">
 
-                                {/* Left */}
-
+                                {/* Left — sticky cover column */}
                                 <div className="w-full">
-                                    <div className="aspect-2/3 w-full max-w-[320px] mx-auto rounded-2xl overflow-hidden shadow-xl shadow-[#4C3D63]/15 border border-purple-100">
-                                        <BookCover
-                                            thumbnail={book.thumbnail}
-                                            title={book.title}
-                                        />
+                                    <div className="lg:sticky lg:top-10 flex flex-col items-center">
+
+                                        <div
+                                            className="
+                                                aspect-2/3 w-full max-w-[320px]
+                                                rounded-2xl overflow-hidden
+                                                shadow-xl shadow-[#4C3D63]/15
+                                                border border-purple-100
+                                                relative
+                                            "
+                                        >
+                                            <BookCover
+                                                thumbnail={book.thumbnail}
+                                                title={book.title}
+                                            />
+                                        </div>
+
+                                        {/* Meta chips under the cover */}
+                                        {metaChips.length > 0 && (
+                                            <div className="flex flex-wrap justify-center gap-2 mt-5">
+                                                {metaChips.map((chip, i) => (
+                                                    <span
+                                                        key={i}
+                                                        className="
+                                                            text-[11px] font-semibold
+                                                            uppercase tracking-wide
+                                                            text-[#8A6FB0]
+                                                            bg-[#F5EEFC]
+                                                            border border-[#EAD9FF]
+                                                            px-3 py-1
+                                                            rounded-full
+                                                        "
+                                                    >
+                                                        {chip}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+
                                     </div>
                                 </div>
 
                                 {/* Right */}
-
-                                <div className="flex flex-col justify-center">
+                                <div className="flex flex-col justify-center min-w-0">
 
                                     <BookInfo book={book} />
 
@@ -155,18 +215,19 @@ function BookDetails() {
                             </div>
 
                             {/* Divider */}
-
-                            <div className="my-12 border-t border-purple-200/60"></div>
+                            <div className="my-12 flex items-center gap-3">
+                                <div className="h-px flex-1 bg-linear-to-r from-transparent via-purple-200/70 to-transparent" />
+                                <span className="text-[#D8C9E8] text-sm">✦</span>
+                                <div className="h-px flex-1 bg-linear-to-r from-transparent via-purple-200/70 to-transparent" />
+                            </div>
 
                             <BookSynopsis
                                 description={book.description}
                             />
 
-                        </div>
+                        </motion.div>
 
                     </main>
-
-
 
                 </div>
             </div>

@@ -1,16 +1,20 @@
 import { useState } from "react";
 import AddToListModel from "./AddToListModel";
 import { addToList } from "../services/lists";
+import EditReviewModel from "./EditReviewModel";
+import { updateReview } from '../services/review'
 
 function AddToListButton({ book }) {
 
     const [open, setOpen] = useState(false);
+    const [selectedBook, setSelectedBook] = useState(null);
+    const [reviewOpen, setReviewOpen] = useState(false);
 
     const handleAdd = async (status) => {
 
         try {
 
-            await addToList({
+            const savebook = await addToList({
 
                 googleBookId: book.id,
 
@@ -30,7 +34,13 @@ function AddToListButton({ book }) {
 
             setOpen(false);
 
-            alert("Book added successfully!");
+            if (status === 'FINISHED') {
+                setSelectedBook(savebook);
+                setReviewOpen(true)
+            }
+            else {
+                alert("Book Added Successfuully");
+            }
 
         } catch (error) {
 
@@ -39,6 +49,22 @@ function AddToListButton({ book }) {
         }
 
     };
+
+    const handleReview = async (updatedBook) => {
+        try {
+            await updateReview(updatedBook.id, {
+                rating: updatedBook.rating,
+                review: updatedBook.review
+            })
+
+            setReviewOpen(false);
+            setSelectedBook(null);
+
+            alert("Review saved successfully!");
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <>
@@ -64,6 +90,16 @@ function AddToListButton({ book }) {
                 open={open}
                 onClose={() => setOpen(false)}
                 onSelect={handleAdd}
+            />
+
+            <EditReviewModel
+                open={reviewOpen}
+                book={selectedBook}
+                onClose={() => {
+                    setReviewOpen(false);
+                    setSelectedBook(null);
+                }}
+                onSave={ handleReview }
             />
 
         </>

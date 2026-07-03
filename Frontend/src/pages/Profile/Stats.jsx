@@ -60,14 +60,14 @@ function Stats() {
 
         <StatCard
           title="Pages Read"
-          value={stats?.pagesRead ?? 0}
+          value={stats?.totalPagesRead ?? 0}
           icon={FileText}
           color="#A78BFA"
         />
 
         <StatCard
           title="Average Rating"
-          value={stats?.averageRating?.toFixed(1) ?? "0.0"}
+          value={stats?.avgRating?.toFixed(1) ?? "0.0"}
           icon={Star}
           color="#FBBF24"
         />

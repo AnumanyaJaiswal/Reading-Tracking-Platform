@@ -91,6 +91,7 @@ const getStats = async (userId) => {
                 author, count
             }))
             .sort((a, b) => b.count - a.count)
+            .slice(0,6);
 
     return {
         totalBooks: totalBooks.length,

@@ -12,11 +12,6 @@ function BookInfo({ book }) {
                 {book.authors.join(", ")}
             </p>
 
-            <div className="mt-6 text-xl">
-
-                ⭐ {book.averageRating || "N/A"}
-
-            </div>
 
         </div>
 

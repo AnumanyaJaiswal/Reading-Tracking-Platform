@@ -27,6 +27,7 @@ const addToList = async ({
                 status,
                 pageCount,
                 categories,
+                finishedAt: status === 'FINISHED' ? new Date(): null
             }
         })
     }
@@ -42,6 +43,7 @@ const addToList = async ({
             pageCount,
             categories,
             status,
+            finishedAt: status === 'FINISHED' ? new Date(): null
         }
     })
 }
