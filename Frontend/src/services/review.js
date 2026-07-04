@@ -5,6 +5,12 @@ export const getMyReview = async () => {
     return response.reviews;
 }
 
+export const getAllReviews = async () => {
+    const response = await api("/reviews");
+    return response.reviews;
+};
+
+
 export const updateReview = async (id, reviewData) => {
     const response = await api(`/reviews/${id}`, {
         method: "PATCH",
