@@ -53,6 +53,7 @@ function AddToListModal({ open, onClose, onSelect }) {
                                 bg-[#F8F4FF]
                                 hover:bg-[#EADFFF]
                                 transition
+                                cursor-pointer
                             "
                         >
                             {option.label}
@@ -64,7 +65,7 @@ function AddToListModal({ open, onClose, onSelect }) {
 
                 <button
                     onClick={onClose}
-                    className="mt-6 w-full text-[#6B5A7A]"
+                    className="mt-6 w-full text-[#6B5A7A] cursor-pointer"
                 >
                     Cancel
                 </button>

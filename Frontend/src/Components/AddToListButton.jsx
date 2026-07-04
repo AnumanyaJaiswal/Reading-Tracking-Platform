@@ -81,6 +81,7 @@ function AddToListButton({ book }) {
                     font-semibold
                     hover:scale-105
                     transition
+                    cursor-pointer
                 "
             >
                 ✨ Add To My Library

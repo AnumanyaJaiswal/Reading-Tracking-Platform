@@ -46,7 +46,11 @@ function ReviewPost({ review }) {
                     </h3>
 
                     <p className="text-sm text-[#8A7B9E]">
-                        {new Date(review.updatedAt).toLocaleDateString()}
+                        {new Date(review.updatedAt).toLocaleDateString("en-IN", {
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric",
+                        })}
                     </p>
 
                 </div>
@@ -78,14 +82,14 @@ function ReviewPost({ review }) {
 
                     <div className="flex gap-1 mt-3">
 
-                        {[1,2,3,4,5].map((n)=>(
+                        {[1, 2, 3, 4, 5].map((n) => (
                             <Star
                                 key={n}
                                 size={18}
                                 className={
                                     n <= review.rating
-                                    ? "fill-yellow-400 text-yellow-400"
-                                    : "text-gray-300"
+                                        ? "fill-yellow-400 text-yellow-400"
+                                        : "text-gray-300"
                                 }
                             />
                         ))}

@@ -74,6 +74,7 @@ function ReviewCard({ book, onEdit }) {
                         transition-all
                         duration-200
                         shadow-md
+                        cursor-pointer
                     "
                     style={{
                         background:

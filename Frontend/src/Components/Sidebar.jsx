@@ -119,6 +119,7 @@ function Sidebar() {
             text-[#B85C7A]
             hover:bg-[#FFF4F7]
             transition
+            cursor-pointer
           "
         >
           <LogOut size={20} />

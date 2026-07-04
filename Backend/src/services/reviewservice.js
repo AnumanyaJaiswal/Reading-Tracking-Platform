@@ -81,6 +81,7 @@ const getAllReviews = async () => {
         },
         select: {
             id: true,
+            googleBookId: true,
             title: true,
             authors: true,
             thumbnail: true,

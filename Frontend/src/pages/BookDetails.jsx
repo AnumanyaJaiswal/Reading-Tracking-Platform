@@ -105,6 +105,7 @@ function BookDetails() {
                                     hover:shadow-md
                                     transition-all
                                     duration-200
+                                    cursor-pointer
                                 "
                             >
                                 <ArrowLeft
