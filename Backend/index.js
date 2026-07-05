@@ -12,6 +12,7 @@ const bookRoutes = require('./src/routes/bookroutes')
 const listRoute = require('./src/routes/listroutes')
 const reviewRoute = require('./src/routes/reviewroutes')
 const statsRoute = require('./src/routes/statsroute')
+const clubRoutes = require("./src/routes/clubroutes");
 
 
 
@@ -49,12 +50,11 @@ app.use('/books' , bookRoutes);
 app.use('/lists' , listRoute);
 app.use('/reviews' , reviewRoute);
 app.use('/stats' , statsRoute);
+app.use("/clubs", clubRoutes);
 
 // =======================
 // Routes
 // =======================
-
-app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
