@@ -6,6 +6,10 @@ const createClub = async ({
     coverImage,
     ownerId,
     isPrivate,
+    googleBookId,
+    bookTitle,
+    bookAuthors,
+    bookThumbnail,
 }) => {
 
     const club = await prisma.club.create({
@@ -15,6 +19,11 @@ const createClub = async ({
             coverImage,
             ownerId,
             isPrivate,
+
+            googleBookId,
+            bookTitle,
+            bookAuthors,
+            bookThumbnail,
         },
 
         include: {
@@ -203,6 +212,8 @@ const leaveClub = async ({ clubId, userId }) => {
 }
 
 const getClubDetails = async ({ clubId, userId }) => {
+
+    // Find if the club exists or not from the database
     const club = await prisma.club.findUnique({
         where: {
             id: clubId,
@@ -231,6 +242,50 @@ const getClubDetails = async ({ clubId, userId }) => {
         throw new Error("Club not found");
     }
 
+    // Creating an array of all members
+    const memberIds = club.members.map(member => member.userId);
+    let readingProgress = null;
+
+    if (club.googleBookId) {
+
+        const finished = await prisma.userBook.count({
+            where: {
+                userId: {
+                    in: memberIds
+                },
+                googleBookId: club.googleBookId,
+                status: "FINISHED"
+            }
+        })
+        const wantToRead = await prisma.userBook.count({
+            where: {
+                userId: {
+                    in: memberIds
+                },
+                googleBookId: club.googleBookId,
+                status: "WANT_TO_READ"
+            }
+        })
+        const reading = await prisma.userBook.count({
+            where: {
+                userId: {
+                    in: memberIds
+                },
+                googleBookId: club.googleBookId,
+                status: "CURRENTLY_READING"
+            }
+        })
+
+        const progress = memberIds.length === 0 ? 0 : Math.round((finished / memberIds.length) * 100)
+
+        readingProgress = {
+            progress,
+            finished,
+            reading,
+            wantToRead,
+        };
+    }
+
     return {
         id: club.id,
 
@@ -250,6 +305,16 @@ const getClubDetails = async ({ clubId, userId }) => {
             (member) => member.userId === userId
         ),
 
+        currentBook: club.googleBookId ?
+            {
+                googleBookId: club.googleBookId,
+                title: club.bookTitle,
+                authors: club.bookAuthors,
+                thumbnail: club.bookThumbnail
+            } : null,
+        
+        readingProgress,
+
         members: club.members.map((member) => ({
             id: member.user.id,
             username: member.user.username,
@@ -267,18 +332,18 @@ const deleteClub = async ({ clubId, userId }) => {
         }
     })
 
-    if(!club) {
+    if (!club) {
         throw new Error("Club not found");
     }
 
     // Check if the user is the owner
-    if(club.ownerId !== userId) {
+    if (club.ownerId !== userId) {
         throw new Error("Only the club owner can delete the club");
     }
 
     // Delete the club
     return prisma.club.delete({
-        where:{
+        where: {
             id: clubId,
         }
     })

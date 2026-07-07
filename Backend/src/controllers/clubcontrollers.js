@@ -10,6 +10,10 @@ const createClubController = async (req, res) => {
             description,
             coverImage,
             isPrivate,
+            googleBookId,
+            bookTitle,
+            bookAuthors,
+            bookThumbnail,
         } = req.body;
 
         // Validation
@@ -26,6 +30,10 @@ const createClubController = async (req, res) => {
             coverImage,
             ownerId,
             isPrivate,
+            googleBookId,
+            bookTitle,
+            bookAuthors,
+            bookThumbnail,
         });
 
         return res.status(201).json({
@@ -86,14 +94,14 @@ const joinClubController = async (req, res) => {
             message: "Successfully joined the club",
         });
 
-    }catch (error) {
+    } catch (error) {
         if (error.message === "Club not found") {
             return res.status(404).json({
                 success: false,
                 message: error.message,
             });
         }
-        else{
+        else {
             return res.status(500).json({
                 success: false,
                 message: error.message,
@@ -106,7 +114,7 @@ const leaveClubController = async (req, res) => {
     try {
         const userId = req.user.id;
         const { clubId } = req.params;
-        await leaveClub({userId, clubId});
+        await leaveClub({ userId, clubId });
         return res.status(200).json({
             success: true,
             message: "Successfully left the club",
@@ -145,7 +153,7 @@ const getClubDetailsController = async (req, res) => {
             success: true,
             clubDetails,
         });
-    }catch (error) {
+    } catch (error) {
         if (error.message === "Club not found") {
             return res.status(404).json({
                 success: false,

@@ -60,19 +60,34 @@ enum ReadingStatus {
 }
 
 model Club {
-  id          String   @id @default(cuid())
-  name        String
-  description String
-  coverImage  String?
 
-  isPrivate   Boolean @default(false)
+  id            String   @id @default(cuid())
 
-  ownerId String
-  owner   User @relation(fields: [ownerId], references: [id])
+  // Club Information
+  name          String
+  description   String
+  clubMessage   String? @db.Text
+  coverImage    String?
 
-  createdAt DateTime @default(now())
+  // Privacy
+  isPrivate     Boolean @default(false)
 
-  members ClubMember[]
+  // Owner
+  ownerId       String
+
+  // Current Discussion Book
+  googleBookId  String?
+  bookTitle     String?
+  bookAuthors   String[]
+  bookThumbnail String?
+
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  owner          User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  members        ClubMember[]
 }
 
 model ClubMember {

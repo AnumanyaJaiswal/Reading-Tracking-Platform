@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Components from './index.js'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import PublicRoute from './routes/PublicRoute.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 
@@ -23,7 +23,10 @@ function App() {
           element={<PublicRoute><Components.Login /></PublicRoute>}
         />
         <Route path="/profile" element={<PrivateRoute><Components.ProfileLayout /></PrivateRoute>}>
-          <Route element={<Components.Stats />} />
+          <Route
+            index
+            element={<Navigate to="stats" replace />}
+          />
           <Route path="stats" element={<Components.Stats />} />
           <Route path="lists" element={<Components.Lists />} />
           <Route path="reviews" element={<Components.Reviews />} />
@@ -48,6 +51,10 @@ function App() {
         <Route
           path='/books/:id'
           element={<PrivateRoute><Components.BookDetails /></PrivateRoute>}
+        />
+        <Route 
+          path='/clubs/:clubId'
+          element={<PrivateRoute><Components.ClubDetails /></PrivateRoute>}
         />
 
       </Routes>
