@@ -52,9 +52,18 @@ function App() {
           path='/books/:id'
           element={<PrivateRoute><Components.BookDetails /></PrivateRoute>}
         />
-        <Route 
+        <Route
           path='/clubs/:clubId'
           element={<PrivateRoute><Components.ClubDetails /></PrivateRoute>}
+        />
+
+        <Route
+          path="/clubs/new"
+          element={
+            <PrivateRoute>
+              <Components.CreateClub />
+            </PrivateRoute>
+          }
         />
 
       </Routes>

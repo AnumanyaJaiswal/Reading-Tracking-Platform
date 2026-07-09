@@ -11,6 +11,7 @@ import Clubs_Public from './pages/Clubs_Public'
 import Home from './pages/Home'
 import BookDetails from './pages/BookDetails'
 import ClubDetails from './pages/ClubDetails'
+import CreateClub from './pages/CreateClub'
 
 export default{
     GetStarted,
@@ -20,6 +21,7 @@ export default{
     Stats,
     Lists,
     Reviews,
+    CreateClub,
     Clubs,
     Search,
     Home,

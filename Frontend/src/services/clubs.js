@@ -22,7 +22,7 @@ export const getClubDetails = async (clubId) => {
 export const createClub = async (clubData) => {
     const data = await api("/clubs", {
         method: "POST",
-        body: JSON.stringify(clubData),
+        body: clubData,
     });
 
     return data.club;

@@ -1,5 +1,7 @@
 const { createClub, getAllClubs, getMyClubs, joinClub, leaveClub, getClubDetails, deleteClub } = require("../services/clubservices");
 
+const { uploadImage } = require("../services/cloudinaryservice");
+
 const createClubController = async (req, res) => {
     try {
         console.log(req.user);
@@ -8,7 +10,6 @@ const createClubController = async (req, res) => {
         const {
             name,
             description,
-            coverImage,
             isPrivate,
             googleBookId,
             bookTitle,
@@ -24,6 +25,13 @@ const createClubController = async (req, res) => {
             });
         }
 
+
+        let coverImage = null;
+        if (req.file) {
+            const result = await uploadImage(req.file.buffer, "club_covers");
+            coverImage = result.secure_url;
+        }
+
         const club = await createClub({
             name,
             description,
@@ -32,7 +40,7 @@ const createClubController = async (req, res) => {
             isPrivate,
             googleBookId,
             bookTitle,
-            bookAuthors,
+            bookAuthors: bookAuthors ? JSON.parse(bookAuthors) : [], // Convert stringified array back to array
             bookThumbnail,
         });
 

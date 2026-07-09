@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function ClubHeader({ clubCount = 0 }) {
+  const navigate = useNavigate();
   return (
     <div className="relative mb-12 overflow-hidden">
       {/* decorative blurred orbs, consistent with rest of app */}
@@ -41,6 +43,7 @@ function ClubHeader({ clubCount = 0 }) {
           </div>
 
           <button
+            onClick={() => navigate("/clubs/new")}
             className="px-5 py-2.5 rounded-full text-sm font-medium text-white shadow-lg shadow-[#B8A6D9]/30 hover:shadow-[#B8A6D9]/50 hover:-translate-y-0.5 transition-all duration-300"
             style={{
               background: "linear-gradient(135deg, #B8A6D9 0%, #8B7BB5 100%)",
