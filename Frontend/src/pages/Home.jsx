@@ -47,7 +47,7 @@ function Home() {
 
         {/* Decorative gradient orbs */}
         <div
-          className="absolute -top-32 -right-32 w-[28rem] h-[28rem] rounded-full pointer-events-none"
+          className="absolute -top-32 -right-32 w-md h-112 rounded-full pointer-events-none"
           style={{
             background: "radial-gradient(circle, rgba(201,182,228,0.4) 0%, rgba(201,182,228,0) 70%)",
           }}
@@ -74,7 +74,7 @@ function Home() {
           <Sparkles size={18} style={{ color: "#C9B6E4" }} />
         </motion.div>
         <motion.div
-          className="absolute top-64 left-[28rem] pointer-events-none"
+          className="absolute top-64 left-112 pointer-events-none"
           animate={{ y: [0, -8, 0], opacity: [0.2, 0.6, 0.2] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         >
