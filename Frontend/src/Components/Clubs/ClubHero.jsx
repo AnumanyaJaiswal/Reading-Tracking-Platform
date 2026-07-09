@@ -1,7 +1,8 @@
 import { Crown, Users, Calendar } from "lucide-react";
 
-function ClubHero({ club }) {
+function ClubHero({ club, onJoin, onLeave }) {
     if (!club) return null;
+
 
     return (
         <div
@@ -59,20 +60,45 @@ function ClubHero({ club }) {
 
                 <div className="flex flex-col gap-4">
 
-                    <button
-                        className="
-                            px-8
-                            py-4
-                            rounded-2xl
-                            bg-[#B08DFF]
-                            text-white
-                            font-semibold
-                            hover:scale-105
-                            transition
-                        "
-                    >
-                        Leave Club
-                    </button>
+                    {club.joined ? (
+
+                        <button
+                            onClick={onLeave}
+                            className="
+                                px-8
+                                py-4
+                                rounded-2xl
+                                bg-white
+                                border
+                                border-[#DCCEFF]
+                                text-[#4C3D63]
+                                font-semibold
+                                hover:bg-[#F9F5FF]
+                                transition
+                            "
+                        >
+                            Leave Club
+                        </button>
+
+                    ) : (
+
+                        <button
+                            onClick={onJoin}
+                            className="
+                                px-8
+                                py-4
+                                rounded-2xl
+                                bg-[#B08DFF]
+                                text-white
+                                font-semibold
+                                hover:scale-105
+                                transition
+                            "
+                        >
+                            Join Club
+                        </button>
+
+                    )}
 
                 </div>
 

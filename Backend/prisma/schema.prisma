@@ -23,6 +23,10 @@ model User {
 
   clubMemberships ClubMember[]
 
+  clubDiscussions ClubDiscussion[]
+  clubComments    ClubComment[]
+  discussionReactions ClubDiscussionReaction[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -51,6 +55,9 @@ model UserBook {
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([userId, status])
+  @@index([userId, finishedAt])
 }
 
 enum ReadingStatus {
@@ -88,6 +95,7 @@ model Club {
   // Relations
   owner          User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   members        ClubMember[]
+  discussions    ClubDiscussion[]
 }
 
 model ClubMember {
@@ -102,4 +110,57 @@ model ClubMember {
   joinedAt DateTime @default(now())
 
   @@unique([clubId, userId])
+  @@index([clubId])
+}
+
+model ClubDiscussion {
+  id        String   @id @default(cuid())
+
+  clubId    String
+  userId    String
+
+  message   String   @db.Text
+
+  isPinned  Boolean @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  club      Club @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  comments  ClubComment[]
+  reactions ClubDiscussionReaction[]
+
+  @@index([clubId, createdAt])
+}
+
+model ClubComment {
+  id            String   @id @default(cuid())
+
+  discussionId  String
+  userId        String
+
+  content       String   @db.Text
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  discussion ClubDiscussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  user       User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([discussionId])
+}
+
+model ClubDiscussionReaction {
+  id            String @id @default(cuid())
+
+  discussionId  String
+  userId        String
+
+  discussion ClubDiscussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  user       User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([discussionId, userId])
 }

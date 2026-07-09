@@ -157,7 +157,7 @@ function AuthorsPieChart({ authors = [] }) {
                                         {total}
                                     </span>
                                     <span className="text-xs text-[#6B5A7A] font-medium">
-                                        books total
+                                        books finished
                                     </span>
                                 </>
                             )}

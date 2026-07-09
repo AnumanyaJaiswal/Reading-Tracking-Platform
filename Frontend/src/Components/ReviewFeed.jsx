@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import { BookHeart } from "lucide-react";
 import ReviewPost from "./ReviewPost";
 
 function ReviewFeed({ reviews }) {
@@ -5,34 +7,74 @@ function ReviewFeed({ reviews }) {
     if (!reviews.length) {
 
         return (
-            <div className="text-center py-20">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-center py-24 rounded-3xl backdrop-blur-xl"
+                style={{
+                    background: "rgba(255,255,255,0.4)",
+                    border: "1px solid rgba(201,182,228,0.25)",
+                }}
+            >
 
-                <h2 className="text-3xl font-bold text-[#4C3D63]">
-                    No Reviews Yet 📚
+                <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
+                    style={{
+                        background: "linear-gradient(135deg, rgba(201,182,228,0.35) 0%, rgba(246,182,209,0.35) 100%)",
+                    }}
+                >
+                    <BookHeart size={28} style={{ color: "#8B7BB5" }} strokeWidth={1.5} />
+                </motion.div>
+
+                <h2
+                    className="text-2xl font-serif italic font-semibold"
+                    style={{ color: "#2D2438" }}
+                >
+                    No Reviews Yet
                 </h2>
 
-                <p className="mt-3 text-[#8A7B9E]">
+                <p className="mt-3" style={{ color: "#8B7BB5" }}>
                     Be the first reader to share your thoughts.
                 </p>
 
-            </div>
+            </motion.div>
         );
     }
 
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.1 },
+        },
+    };
+
+    const item = {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    };
+
     return (
 
-        <div className="space-y-8">
+        <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="space-y-5"
+        >
 
             {reviews.map(review => (
 
-                <ReviewPost
-                    key={review.id}
-                    review={review}
-                />
+                <motion.div key={review.id} variants={item}>
+                    <ReviewPost review={review} />
+                </motion.div>
 
             ))}
 
-        </div>
+        </motion.div>
 
     );
 }

@@ -349,6 +349,7 @@ const deleteClub = async ({ clubId, userId }) => {
     })
 }
 
+
 module.exports = {
     createClub,
     getAllClubs,

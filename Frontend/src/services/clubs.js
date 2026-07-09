@@ -48,3 +48,15 @@ export const deleteClub = async (clubId) => {
         method: "DELETE",
     });
 };
+
+export const createDiscussion = async(clubId, message)=>{
+    return await api(`/clubs/${clubId}/discussions`, {
+        method: "POST",
+        body: JSON.stringify({message})
+    })
+}
+
+export const getDiscussions = async(clubId)=>{
+    const data = await api(`/clubs/${clubId}/discussions`);
+    return data.discussions;
+}

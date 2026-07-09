@@ -78,7 +78,6 @@ function ClubCard({ club, onJoin }) {
         </div>
 
         <div className="mt-5 flex items-center justify-end">
-          {club?.joined ? (
             <motion.button
               whileHover={{ scale: 1.03 }}
               onClick={() => navigate(`/clubs/${club.id}`)}
@@ -87,16 +86,6 @@ function ClubCard({ club, onJoin }) {
             >
               Enter Circle →
             </motion.button>
-          ) : (
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              onClick={() => onJoin?.(club.id)}
-              className="text-xs font-medium px-4 py-2 rounded-full border transition-colors duration-200"
-              style={{ color: "#8B7BB5", borderColor: "#C9B6E4" }}
-            >
-              Join Circle
-            </motion.button>
-          )}
         </div>
       </div>
     </motion.div>
