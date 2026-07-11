@@ -13,6 +13,8 @@ const reviewRoute = require('./src/routes/reviewroutes')
 const statsRoute = require('./src/routes/statsroute')
 const clubRoutes = require("./src/routes/clubroutes");
 
+const setupSocket = require('./src/socket')
+
 const PORT = process.env.PORT || 8000;
 
 //For socket.io
@@ -22,6 +24,14 @@ const { Server } = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 
+const io = new Server(server,{
+  cors:{
+      origin: process.env.FRONTEND_URL,
+      credentials:true
+  }
+})
+
+setupSocket(io);
 
 
 // Connect Database
@@ -77,6 +87,6 @@ app.get("/api/health", (req, res) => {
 // Server
 // =======================
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });

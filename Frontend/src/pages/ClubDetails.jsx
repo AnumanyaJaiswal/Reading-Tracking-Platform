@@ -11,6 +11,8 @@ import MembersPreview from "../Components/Clubs/MembersPreview";
 import { getClubDetails, joinClub, leaveClub, getDiscussions, createDiscussion } from '../services/clubs'
 import { useAuth } from '../Context/AuthContext'
 
+import socket from "../socket";
+
 // Ornamental divider used between sections — a small serif kicker
 // flanked by fading gradient lines and a pair of sparkles.
 function SectionDivider({ label }) {
@@ -89,6 +91,56 @@ function ClubDetails() {
         fetchClub();
     }, [clubId]);
 
+    useEffect(() => {
+        socket.connect();
+        socket.emit("joinClub", clubId);
+
+        const handleNewDiscussion = (discussion) => {
+
+            setDiscussions(prev => [
+                ...prev,
+                discussion
+            ]);
+
+        };
+
+        const handleSocketError = (error) => {
+
+            console.error(
+                "Socket Error:",
+                error
+            );
+        };
+
+
+        socket.on(
+            "newDiscussion",
+            handleNewDiscussion
+        );
+
+
+        socket.on(
+            "discussionError",
+            handleSocketError
+        );
+        
+
+        return () => {
+            socket.off(
+                "newDiscussion",
+                handleNewDiscussion
+            );
+
+            socket.off(
+                "discussionError",
+                handleSocketError
+            );
+
+            socket.disconnect();
+        }
+    }, [clubId])
+
+
     if (!club) {
         return (
             <Loader />
@@ -126,11 +178,12 @@ function ClubDetails() {
     }
 
     const handlePostDiscussion = async (message) => {
-        const discussion = await createDiscussion(clubId, message);
-        setDiscussions((prev) => [
-            ...prev,
-            discussion,
-        ])
+        socket.emit("sendDiscussion",
+            {
+                clubId,
+                message
+            }
+        )
     }
 
     return (
