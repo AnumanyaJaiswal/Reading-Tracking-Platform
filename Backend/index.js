@@ -7,16 +7,22 @@ const cookieParser = require("cookie-parser");
 const prisma = require("./src/config/db");
 const authRoutes = require("./src/routes/authroutes");
 
-const app = express();
 const bookRoutes = require('./src/routes/bookroutes')
 const listRoute = require('./src/routes/listroutes')
 const reviewRoute = require('./src/routes/reviewroutes')
 const statsRoute = require('./src/routes/statsroute')
 const clubRoutes = require("./src/routes/clubroutes");
 
-
-
 const PORT = process.env.PORT || 8000;
+
+//For socket.io
+const http = require("http");
+const { Server } = require("socket.io");
+
+const app = express();
+const server = http.createServer(app);
+
+
 
 // Connect Database
 async function connectDB() {

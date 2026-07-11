@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Sparkles, Lock } from "lucide-react";
 import Loader from "../Components/Loader";
 import ClubHero from "../Components/Clubs/ClubHero";
 import ClubReadingProgress from "../Components/Clubs/ClubReadingProgress";
@@ -91,36 +91,7 @@ function ClubDetails() {
 
     if (!club) {
         return (
-            <div className="relative min-h-[70vh] flex items-center justify-center px-4">
-
-                <AmbientBackdrop />
-
-                <motion.div
-                    initial={{ opacity: 0, y: 12, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="
-                        flex
-                        flex-col
-                        items-center
-                        gap-4
-                        px-10
-                        py-12
-                        rounded-3xl
-                        border
-                        border-white/60
-                        backdrop-blur-xl
-                        shadow-xl
-                    "
-                    style={{ background: "rgba(255,255,255,0.5)" }}
-                >
-                    <Loader />
-                    <p className="text-sm text-[#8B7BB5] font-serif italic tracking-wide">
-                        Gathering the club...
-                    </p>
-                </motion.div>
-
-            </div>
+            <Loader />
         );
     }
 
@@ -227,23 +198,67 @@ function ClubDetails() {
                 still be resolving the logged-in user for a brief moment.
                 Without this guard, `user.id` below would throw on a null
                 user and blank out the whole page. */}
-            <AnimatePresence>
-                {club.joined && user && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                    >
-                        <SectionDivider label="The Circle Speaks" />
-                        <ClubDiscussionRoom
-                            discussions={discussions}
-                            onPost={handlePostDiscussion}
-                            currentUserId={user.id}
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.1, ease: "easeOut" }}
+            >
+                <SectionDivider label="The Circle Speaks" />
+
+                <AnimatePresence mode="wait">
+                    {club.joined && user ? (
+                        <motion.div
+                            key="discussion-room"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                        >
+                            <ClubDiscussionRoom
+                                discussions={discussions}
+                                onPost={handlePostDiscussion}
+                                currentUserId={user.id}
+                            />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="discussion-locked"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            className="relative flex flex-col items-center justify-center text-center gap-4 py-16 px-6 rounded-3xl border border-white/60 backdrop-blur-xl shadow-sm overflow-hidden"
+                            style={{ background: "rgba(255,255,255,0.5)" }}
+                        >
+                            <div
+                                className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full blur-3xl"
+                                style={{ background: "radial-gradient(circle, #C9B6E4 0%, transparent 70%)" }}
+                            />
+                            <div
+                                className="flex items-center justify-center w-12 h-12 rounded-full mb-1"
+                                style={{ background: "linear-gradient(135deg, #C9B6E4, #8B7BB5)" }}
+                            >
+                                <Lock size={18} className="text-white" strokeWidth={2} />
+                            </div>
+                            <h3 className="font-serif italic text-lg sm:text-xl text-[#2D2438]">
+                                The Circle is Members-Only
+                            </h3>
+                            <p className="text-sm text-[#6B5A7A] max-w-sm">
+                                Join the club to read discussions and share your thoughts with fellow readers.
+                            </p>
+                            <motion.button
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                                onClick={handleJoin}
+                                className="mt-2 px-6 py-2.5 rounded-full text-sm font-medium text-white shadow-sm"
+                                style={{ background: "linear-gradient(135deg, #8B7BB5, #C9B6E4)" }}
+                            >
+                                Join the Club
+                            </motion.button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.div>
 
             <motion.div
                 initial={{ opacity: 0, y: 16 }}

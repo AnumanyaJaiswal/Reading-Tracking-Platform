@@ -8,12 +8,13 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
     const [message, setMessage] = useState("")
     const [isSending, setIsSending] = useState(false);
     const [showScrollButton, setShowScrollButton] = useState(false);
-    const chatEndRef = useRef(null);
     const messagesContainerRef = useRef(null);
     const isFirstRender = useRef(true);
 
     const scrollToBottom = (behavior = "smooth") => {
-        chatEndRef.current?.scrollIntoView({ behavior });
+        const el = messagesContainerRef.current;
+        if (!el) return;
+        el.scrollTo({ top: el.scrollHeight, behavior });
         setShowScrollButton(false);
     };
 
@@ -46,7 +47,7 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
             setShowScrollButton(true);
         }
     }, [discussions])
-    
+
     const handleSend = async () => {
         if (!message.trim() || isSending) return;
 
@@ -146,10 +147,10 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
 
             <div className="relative">
 
-            <div
-                ref={messagesContainerRef}
-                onScroll={handleScroll}
-                className="
+                <div
+                    ref={messagesContainerRef}
+                    onScroll={handleScroll}
+                    className="
                     pcy-chat-scroll
                     relative
                     p-8
@@ -157,12 +158,12 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                     max-h-150
                     overflow-y-auto
                 "
-            >
+                >
 
-                {discussions.length === 0 && (
-                    <div className="flex flex-col items-center justify-center py-16 text-center">
-                        <div
-                            className="
+                    {discussions.length === 0 && (
+                        <div className="flex flex-col items-center justify-center py-16 text-center">
+                            <div
+                                className="
                                 w-14
                                 h-14
                                 rounded-full
@@ -171,42 +172,42 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                                 justify-center
                                 mb-4
                             "
-                            style={{
-                                background: "linear-gradient(135deg, #C9B6E4 0%, #F6B6D1 100%)",
-                            }}
-                        >
-                            <Sparkles size={22} className="text-white" />
+                                style={{
+                                    background: "linear-gradient(135deg, #C9B6E4 0%, #F6B6D1 100%)",
+                                }}
+                            >
+                                <Sparkles size={22} className="text-white" />
+                            </div>
+                            <p className="font-serif italic text-lg text-[#2D2438]">
+                                No thoughts shared yet
+                            </p>
+                            <p className="text-sm text-[#9A8CA6] mt-1">
+                                Be the first to start the conversation
+                            </p>
                         </div>
-                        <p className="font-serif italic text-lg text-[#2D2438]">
-                            No thoughts shared yet
-                        </p>
-                        <p className="text-sm text-[#9A8CA6] mt-1">
-                            Be the first to start the conversation
-                        </p>
-                    </div>
-                )}
+                    )}
 
-                <AnimatePresence initial={false}>
-                    {discussions.map((discussion) => {
-                        const isMine = discussion.user.id === currentUserId;
+                    <AnimatePresence initial={false}>
+                        {discussions.map((discussion) => {
+                            const isMine = discussion.user.id === currentUserId;
 
-                        return (
-                            <motion.div
-                                key={discussion.id}
-                                initial={{ opacity: 0, y: 16, scale: 0.98 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                                className={`
+                            return (
+                                <motion.div
+                                    key={discussion.id}
+                                    initial={{ opacity: 0, y: 16, scale: 0.98 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    transition={{ duration: 0.3, ease: "easeOut" }}
+                                    className={`
                                     flex
                                     gap-3
                                     w-full
                                     ${isMine ? "justify-end" : "justify-start"}
                                 `}
-                            >
+                                >
 
-                                {!isMine && (
-                                    <div
-                                        className="
+                                    {!isMine && (
+                                        <div
+                                            className="
                                             w-9
                                             h-9
                                             rounded-full
@@ -219,33 +220,33 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                                             shrink-0
                                             shadow-sm
                                         "
-                                        style={{
-                                            background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",
-                                        }}
-                                    >
-                                        {discussion.user.username[0].toUpperCase()}
-                                    </div>
-                                )}
+                                            style={{
+                                                background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",
+                                            }}
+                                        >
+                                            {discussion.user.username[0].toUpperCase()}
+                                        </div>
+                                    )}
 
-                                {/* Message */}
+                                    {/* Message */}
 
-                                <div className={`max-w-lg flex flex-col ${isMine ? "items-end" : "items-start"}`}>
+                                    <div className={`max-w-lg flex flex-col ${isMine ? "items-end" : "items-start"}`}>
 
-                                    <div className="flex items-center gap-2 mb-1 px-1">
-                                        {!isMine && (
-                                            <h3 className="text-sm font-semibold text-[#4C3D63]">
-                                                {discussion.user?.username}
-                                            </h3>
-                                        )}
+                                        <div className="flex items-center gap-2 mb-1 px-1">
+                                            {!isMine && (
+                                                <h3 className="text-sm font-semibold text-[#4C3D63]">
+                                                    {discussion.user?.username}
+                                                </h3>
+                                            )}
 
-                                        <span className="text-xs text-[#B3A6C2]">
-                                            {timeAgo(discussion.createdAt)}
-                                        </span>
-                                    </div>
+                                            <span className="text-xs text-[#B3A6C2]">
+                                                {timeAgo(discussion.createdAt)}
+                                            </span>
+                                        </div>
 
 
-                                    <p
-                                        className={`
+                                        <p
+                                            className={`
                                             px-5
                                             py-3
                                             rounded-3xl
@@ -253,24 +254,24 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                                             text-[15px]
                                             shadow-sm
                                             ${isMine
-                                                ? "text-white rounded-br-md"
-                                                : "bg-white/70 text-[#2D2438] border border-white/60 rounded-bl-md"
-                                            }
+                                                    ? "text-white rounded-br-md"
+                                                    : "bg-white/70 text-[#2D2438] border border-white/60 rounded-bl-md"
+                                                }
                                         `}
-                                        style={
-                                            isMine
-                                                ? { background: "linear-gradient(135deg, #B08DFF 0%, #9B7FD4 100%)" }
-                                                : undefined
-                                        }
-                                    >
-                                        {discussion.message}
-                                    </p>
+                                            style={
+                                                isMine
+                                                    ? { background: "linear-gradient(135deg, #B08DFF 0%, #9B7FD4 100%)" }
+                                                    : undefined
+                                            }
+                                        >
+                                            {discussion.message}
+                                        </p>
 
-                                </div>
+                                    </div>
 
-                                {isMine && (
-                                    <div
-                                        className="
+                                    {isMine && (
+                                        <div
+                                            className="
                                             w-9
                                             h-9
                                             rounded-full
@@ -283,34 +284,33 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                                             shrink-0
                                             shadow-sm
                                         "
-                                        style={{
-                                            background: "linear-gradient(135deg, #F6B6D1 0%, #B08DFF 100%)",
-                                        }}
-                                    >
-                                        {discussion.user.username[0].toUpperCase()}
-                                    </div>
-                                )}
+                                            style={{
+                                                background: "linear-gradient(135deg, #F6B6D1 0%, #B08DFF 100%)",
+                                            }}
+                                        >
+                                            {discussion.user.username[0].toUpperCase()}
+                                        </div>
+                                    )}
 
-                            </motion.div>
-                        );
-                    })}
-                </AnimatePresence>
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
 
-                <div ref={chatEndRef}></div>
 
-            </div>
+                </div>
 
-            <AnimatePresence>
-                {showScrollButton && (
-                    <motion.button
-                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                        transition={{ duration: 0.2 }}
-                        whileHover={{ scale: 1.08 }}
-                        whileTap={{ scale: 0.94 }}
-                        onClick={() => scrollToBottom()}
-                        className="
+                <AnimatePresence>
+                    {showScrollButton && (
+                        <motion.button
+                            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                            transition={{ duration: 0.2 }}
+                            whileHover={{ scale: 1.08 }}
+                            whileTap={{ scale: 0.94 }}
+                            onClick={() => scrollToBottom()}
+                            className="
                             absolute
                             bottom-4
                             left-1/2
@@ -324,15 +324,15 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                             text-white
                             shadow-lg
                         "
-                        style={{
-                            background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",
-                        }}
-                        aria-label="Scroll to latest message"
-                    >
-                        <ChevronDown size={18} />
-                    </motion.button>
-                )}
-            </AnimatePresence>
+                            style={{
+                                background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",
+                            }}
+                            aria-label="Scroll to latest message"
+                        >
+                            <ChevronDown size={18} />
+                        </motion.button>
+                    )}
+                </AnimatePresence>
 
             </div>
 
