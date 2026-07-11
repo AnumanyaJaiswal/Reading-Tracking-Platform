@@ -50,10 +50,11 @@ export const deleteClub = async (clubId) => {
 };
 
 export const createDiscussion = async(clubId, message)=>{
-    return await api(`/clubs/${clubId}/discussions`, {
+    const data = await api(`/clubs/${clubId}/discussions`, {
         method: "POST",
         body: JSON.stringify({message})
     })
+    return data.discussion;
 }
 
 export const getDiscussions = async(clubId)=>{

@@ -65,6 +65,10 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route 
+          path='/clubs/:clubId/members'
+          element={<PrivateRoute><Components.ClubMembers /></PrivateRoute>}
+        />
 
       </Routes>
 

@@ -61,7 +61,7 @@ const getDiscussions = async(clubId)=>{
         },
 
         orderBy: {
-            createdAt: "desc",
+            createdAt: "asc",
         },
     })
 
