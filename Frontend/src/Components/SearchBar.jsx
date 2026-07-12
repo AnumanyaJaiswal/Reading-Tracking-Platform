@@ -7,7 +7,7 @@ export default function SearchBar({
 }) {
 
     return (
-        <div className="flex items-center gap-4 mt-8">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-4 sm:mt-8">
 
             <input
                 type="text"
@@ -21,13 +21,14 @@ export default function SearchBar({
                 placeholder="🔮 Search magical books..."
                 className="
                     flex-1
-                    px-6
-                    py-4
+                    px-4 py-3
+                    sm:px-6 sm:py-4
                     rounded-2xl
                     border
                     border-[#B08DFF]
                     bg-white
                     shadow-md
+                    text-sm sm:text-base
                     text-[#4C3D63]
                     outline-none
                     focus:ring-2
@@ -38,11 +39,12 @@ export default function SearchBar({
             <button
                 onClick={onSearch}
                 className="
-                    px-8
-                    py-4
+                    px-6 py-3
+                    sm:px-8 sm:py-4
                     rounded-2xl
                     bg-[#B08DFF]
                     text-white
+                    text-sm sm:text-base
                     hover:scale-105
                     transition
                 "

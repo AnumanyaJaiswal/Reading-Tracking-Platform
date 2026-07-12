@@ -13,7 +13,7 @@ function BookCard({ book }) {
         group
         relative
         bg-white
-        rounded-2xl
+        rounded-xl sm:rounded-2xl
         shadow-md
         hover:shadow-xl
         hover:shadow-[#4C3D63]/15
@@ -41,9 +41,9 @@ function BookCard({ book }) {
             "
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center px-4 text-center">
-            <span className="text-3xl mb-2">📖</span>
-            <span className="text-xs font-medium text-[#8A7B9E] line-clamp-3">
+          <div className="w-full h-full flex flex-col items-center justify-center px-3 sm:px-4 text-center">
+            <span className="text-2xl sm:text-3xl mb-2">📖</span>
+            <span className="text-[10px] sm:text-xs font-medium text-[#8A7B9E] line-clamp-3">
               {book.title}
             </span>
           </div>
@@ -62,8 +62,9 @@ function BookCard({ book }) {
         {/* Floating "View details" on hover, over the image */}
         <div
           className="
-            absolute bottom-3 left-3 right-3
-            flex items-center justify-between
+            absolute bottom-2 left-2 right-2
+            sm:bottom-3 sm:left-3 sm:right-3
+            hidden sm:flex items-center justify-between
             opacity-0 translate-y-1
             group-hover:opacity-100 group-hover:translate-y-0
             transition-all duration-300
@@ -85,12 +86,12 @@ function BookCard({ book }) {
       </div>
 
       {/* Text content */}
-      <div className="p-3.5 flex flex-col flex-1">
-        <h2 className="font-bold text-[13.5px] text-[#4C3D63] leading-snug line-clamp-2 min-h-10">
+      <div className="p-2.5 sm:p-3.5 flex flex-col flex-1">
+        <h2 className="font-bold text-[12px] sm:text-[13.5px] text-[#4C3D63] leading-snug line-clamp-2 min-h-8 sm:min-h-10">
           {book.title}
         </h2>
 
-        <p className="text-xs text-[#A597B8] mt-1 line-clamp-1">
+        <p className="text-[10px] sm:text-xs text-[#A597B8] mt-1 line-clamp-1">
           {book.authors?.length ? book.authors.join(", ") : "Unknown author"}
         </p>
       </div>

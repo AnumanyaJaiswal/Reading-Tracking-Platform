@@ -40,16 +40,16 @@ function BookDetails() {
         return (
             <div className="flex">
                 <Sidebar />
-                <div className="min-h-screen w-full ml-72 flex flex-col items-center justify-center bg-[#FFFDF8] relative overflow-hidden">
+                <div className="min-h-screen w-full pt-16 md:pt-0 md:ml-72 flex flex-col items-center justify-center bg-[#FFFDF8] relative overflow-hidden px-4 text-center">
 
                     <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#D8C9E8] rounded-full blur-[100px] opacity-40" />
                     <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-[#F6D9E8] rounded-full blur-[100px] opacity-40" />
 
-                    <span className="relative text-6xl animate-bounce inline-block" style={{ animationDuration: "1.6s" }}>
+                    <span className="relative text-5xl sm:text-6xl animate-bounce inline-block" style={{ animationDuration: "1.6s" }}>
                         📖
                     </span>
 
-                    <h1 className="relative mt-6 text-3xl font-bold text-[#4C3D63] animate-pulse">
+                    <h1 className="relative mt-6 text-2xl sm:text-3xl font-bold text-[#4C3D63] animate-pulse">
                         Opening the magical book...
                     </h1>
 
@@ -76,23 +76,24 @@ function BookDetails() {
             <div className="flex">
                 <Sidebar />
 
-                <div className="min-h-screen w-full ml-72 bg-[#FFFDF8] relative overflow-hidden">
+                <div className="min-h-screen w-full md:ml-72 bg-[#FFFDF8] relative overflow-hidden">
 
                     {/* Decorative blurred orbs for depth */}
                     <div className="absolute top-0 left-1/3 w-96 h-96 bg-[#E8DFF2] rounded-full blur-[120px] opacity-50 pointer-events-none" />
                     <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#FCE4F0] rounded-full blur-[120px] opacity-40 pointer-events-none" />
                     <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E0EBFA] rounded-full blur-[120px] opacity-30 pointer-events-none" />
 
-                    <main className="relative z-10 px-12 py-10">
+                    <main className="relative z-10 px-4 pt-20 pb-10 sm:px-6 sm:pt-24 md:px-12 md:pt-10 md:pb-10">
 
                         {/* Top bar: back button + subtle breadcrumb */}
-                        <div className="flex items-center justify-between mb-10">
+                        <div className="flex items-center justify-between gap-3 mb-8 md:mb-10">
                             <button
                                 onClick={() => navigate(-1)}
                                 className="
                                     group
                                     flex items-center gap-2
-                                    px-4 py-2
+                                    px-3 py-2
+                                    sm:px-4
                                     rounded-2xl
                                     bg-white/70
                                     backdrop-blur-md
@@ -106,6 +107,7 @@ function BookDetails() {
                                     transition-all
                                     duration-200
                                     cursor-pointer
+                                    shrink-0
                                 "
                             >
                                 <ArrowLeft
@@ -115,9 +117,9 @@ function BookDetails() {
                                 Back
                             </button>
 
-                            <div className="flex items-center gap-1.5 text-xs font-medium text-[#B08DFF] uppercase tracking-widest">
+                            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-medium text-[#B08DFF] uppercase tracking-widest shrink-0">
                                 <BookMarked size={13} />
-                                Book Details
+                                <span className="hidden xs:inline">Book Details</span>
                             </div>
                         </div>
 
@@ -126,13 +128,13 @@ function BookDetails() {
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4 }}
-                            className="text-center mb-12"
+                            className="text-center mb-8 md:mb-12 px-2"
                         >
-                            <h1 className="text-5xl font-bold text-[#4C3D63] drop-shadow-sm">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#4C3D63] drop-shadow-sm">
                                 📖 Enchanted Tome
                             </h1>
 
-                            <p className="mt-3 text-lg text-[#7C6A9A]">
+                            <p className="mt-3 text-base sm:text-lg text-[#7C6A9A]">
                                 Every story is a constellation waiting to be explored.
                             </p>
                         </motion.div>
@@ -147,16 +149,16 @@ function BookDetails() {
                                 mx-auto
                                 bg-white/60
                                 backdrop-blur-xl
-                                rounded-[40px]
+                                rounded-[28px] sm:rounded-[32px] md:rounded-[40px]
                                 shadow-2xl
                                 shadow-[#4C3D63]/10
                                 border
                                 border-white/80
-                                p-10
+                                p-5 sm:p-8 md:p-10
                             "
                         >
 
-                            <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-16">
+                            <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 sm:gap-10 lg:gap-16">
 
                                 {/* Left — sticky cover column */}
                                 <div className="w-full">
@@ -164,7 +166,7 @@ function BookDetails() {
 
                                         <div
                                             className="
-                                                aspect-2/3 w-full max-w-[320px]
+                                                aspect-2/3 w-full max-w-[220px] sm:max-w-[260px] lg:max-w-[320px]
                                                 rounded-2xl overflow-hidden
                                                 shadow-xl shadow-[#4C3D63]/15
                                                 border border-purple-100
@@ -216,7 +218,7 @@ function BookDetails() {
                             </div>
 
                             {/* Divider */}
-                            <div className="my-12 flex items-center gap-3">
+                            <div className="my-8 md:my-12 flex items-center gap-3">
                                 <div className="h-px flex-1 bg-linear-to-r from-transparent via-purple-200/70 to-transparent" />
                                 <span className="text-[#D8C9E8] text-sm">✦</span>
                                 <div className="h-px flex-1 bg-linear-to-r from-transparent via-purple-200/70 to-transparent" />

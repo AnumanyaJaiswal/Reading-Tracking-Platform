@@ -36,7 +36,7 @@ function Stats() {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
         <StatCard
           title="Total Books"
           value={stats?.totalBooks ?? 0}
@@ -81,7 +81,7 @@ function Stats() {
 
       </div>
 
-      <div className="mt-10">
+      <div className="mt-8 sm:mt-10">
         <AuthorsBreakdown authors={stats.authorsBreakdown} />
       </div>
     </div>

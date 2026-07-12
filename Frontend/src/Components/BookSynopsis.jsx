@@ -16,7 +16,7 @@ function BookSynopsis({ description }) {
     return (
         <div className="mt-2">
 
-            <h2 className="text-2xl lg:text-3xl font-bold text-[#4C3D63] mb-5 flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#4C3D63] mb-4 sm:mb-5 flex items-center gap-2">
                 <span className="text-[#D8C9E8]">✦</span>
                 Synopsis
             </h2>
@@ -26,9 +26,9 @@ function BookSynopsis({ description }) {
                 <div
                     ref={contentRef}
                     className="
-                        prose prose-lg max-w-none
+                        prose prose-sm sm:prose-base lg:prose-lg max-w-none
                         text-[#5C4B70]
-                        leading-8
+                        leading-7 sm:leading-8
                         overflow-hidden
                         transition-all duration-500 ease-in-out
                     "

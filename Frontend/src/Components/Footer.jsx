@@ -6,26 +6,26 @@ function Footer() {
       className="
         bg-[#FDF2F8]
         border-t border-[#F0E5FF]
-        ml-72
+        ml-0 md:ml-72
       "
     >
       <div
         className="
           max-w-7xl
           mx-auto
-          px-6
-          py-10
+          px-4 sm:px-6
+          py-8 sm:py-10
           text-center
         "
       >
         {/* Logo */}
 
         <div className="flex justify-center items-center gap-2">
-          <span className="text-2xl">🌙</span>
+          <span className="text-xl sm:text-2xl">🌙</span>
 
           <h2
             className="
-              text-3xl
+              text-2xl sm:text-3xl
               font-serif
               font-bold
               bg-linear-to-r
@@ -45,6 +45,7 @@ function Footer() {
         <p
           className="
             mt-4
+            text-sm sm:text-base
             text-[#6B5A7A]
             italic
           "
@@ -58,8 +59,9 @@ function Footer() {
           className="
             mt-6
             flex
+            flex-wrap
             justify-center
-            gap-8
+            gap-x-4 gap-y-2 sm:gap-8
             text-[#6B5A7A]
             text-sm
           "
@@ -84,7 +86,7 @@ function Footer() {
 
         <p
           className="
-            text-sm
+            text-xs sm:text-sm
             text-[#9A8CA6]
           "
         >

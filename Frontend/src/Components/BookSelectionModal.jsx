@@ -50,6 +50,8 @@ function BookSelectionModal({
                 flex
                 items-center
                 justify-center
+                p-4
+                sm:p-6
             "
         >
 
@@ -57,34 +59,36 @@ function BookSelectionModal({
                 className="
                     bg-[#FFFDF8]
                     rounded-3xl
-                    w-\[900px\]
+                    w-full
+                    max-w-[900px]
                     max-h-[85vh]
                     overflow-y-auto
-                    p-8
+                    p-5
+                    sm:p-8
                     shadow-2xl
                 "
             >
 
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center gap-3">
 
-                    <h2 className="text-3xl font-bold text-[#4C3D63]">
+                    <h2 className="text-xl sm:text-3xl font-bold text-[#4C3D63]">
                         📖 Choose Current Book
                     </h2>
 
                     <button
                         onClick={onClose}
-                        className="text-3xl"
+                        className="text-2xl sm:text-3xl shrink-0"
                     >
                         ✕
                     </button>
 
                 </div>
 
-                <p className="mt-2 text-[#7C6A9A]">
+                <p className="mt-2 text-sm sm:text-base text-[#7C6A9A]">
                     Search for the magical book your circle will read together.
                 </p>
 
-                <div className="mt-8 flex gap-3">
+                <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3">
 
                     <input
                         type="text"
@@ -96,8 +100,10 @@ function BookSelectionModal({
                         rounded-2xl
                         border
                         border-[#E7D9FF]
-                        px-5
-                        py-4
+                        px-4
+                        py-3
+                        sm:px-5
+                        sm:py-4
                         outline-none
                         focus:ring-2
                      focus:ring-[#B08DFF]
@@ -107,7 +113,11 @@ function BookSelectionModal({
                     <button
                         onClick={handleSearch}
                         className="
+                        w-full
+                        sm:w-auto
                         px-8
+                        py-3
+                        sm:py-0
                         rounded-2xl
                      bg-[#B08DFF]
                      text-white
@@ -125,7 +135,7 @@ function BookSelectionModal({
                     )
                 }
 
-                <div className="mt-8 space-y-4">
+                <div className="mt-6 sm:mt-8 space-y-4">
 
                     {books.map((book) => (
 
@@ -133,8 +143,11 @@ function BookSelectionModal({
                             key={book.id}
                             className="
                                     flex
+                                    flex-col
+                                    sm:flex-row
                                     justify-between
-                                    items-center
+                                    sm:items-center
+                                    gap-3
                                     p-4
                                     rounded-2xl
                                  bg-white
@@ -147,7 +160,7 @@ function BookSelectionModal({
                                 <img
                                     src={book.thumbnail}
                                     alt={book.title}
-                                    className="w-16 rounded-lg"
+                                    className="w-16 rounded-lg shrink-0"
                                 />
 
                                 <div>
@@ -170,6 +183,8 @@ function BookSelectionModal({
                                     onClose();
                                 }}
                                 className="
+                                        w-full
+                                        sm:w-auto
                                         px-5
                                         py-2
                                         rounded-xl

@@ -31,7 +31,7 @@ function ClubCard({ club, onJoin }) {
     >
       {/* cover banner — falls back to a soft aura if no coverImage */}
       <div
-        className="relative h-32 w-full overflow-hidden"
+        className="relative h-28 sm:h-32 w-full overflow-hidden"
         style={
           club?.coverImage
             ? undefined
@@ -60,8 +60,8 @@ function ClubCard({ club, onJoin }) {
       </div>
 
       {/* body */}
-      <div className="px-6 pt-5 pb-6">
-        <h3 className="font-serif italic text-xl text-[#2D2438] leading-snug">
+      <div className="px-5 pt-4 pb-5 sm:px-6 sm:pt-5 sm:pb-6">
+        <h3 className="font-serif italic text-lg sm:text-xl text-[#2D2438] leading-snug">
           {club?.name ?? "Untitled Circle"}
         </h3>
 
@@ -78,14 +78,14 @@ function ClubCard({ club, onJoin }) {
         </div>
 
         <div className="mt-5 flex items-center justify-end">
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              onClick={() => navigate(`/clubs/${club.id}`)}
-              className="text-xs font-medium px-4 py-2 rounded-full text-white shadow-md"
-              style={{ background: `linear-gradient(135deg, ${auraEnd}, #6B5F9A)` }}
-            >
-              Enter Circle →
-            </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            onClick={() => navigate(`/clubs/${club.id}`)}
+            className="text-xs font-medium px-4 py-2 rounded-full text-white shadow-md"
+            style={{ background: `linear-gradient(135deg, ${auraEnd}, #6B5F9A)` }}
+          >
+            Enter Circle →
+          </motion.button>
         </div>
       </div>
     </motion.div>

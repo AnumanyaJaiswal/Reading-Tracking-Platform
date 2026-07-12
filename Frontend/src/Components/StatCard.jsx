@@ -8,8 +8,8 @@ function StatCard({ title, value, icon: Icon, color }) {
         relative
         bg-white/70
         backdrop-blur-xl
-        rounded-3xl
-        p-6
+        rounded-2xl sm:rounded-3xl
+        p-4 sm:p-6
         border border-[#F3E8FF]
         shadow-[0_4px_24px_rgba(176,141,255,0.12)]
         hover:-translate-y-1.5
@@ -41,19 +41,20 @@ function StatCard({ title, value, icon: Icon, color }) {
 
       <div className="relative flex justify-between items-start">
         <div>
-          <p className="text-[#6B5A7A] text-sm font-medium tracking-wide">
+          <p className="text-[#6B5A7A] text-xs sm:text-sm font-medium tracking-wide">
             {title}
           </p>
 
-          <h2 className="text-4xl font-serif font-bold text-[#4C3D63] mt-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#4C3D63] mt-2">
             {value}
           </h2>
         </div>
 
         <div
           className="
-            w-14 h-14
-            rounded-2xl
+            w-11 h-11
+            sm:w-14 sm:h-14
+            rounded-xl sm:rounded-2xl
             flex items-center justify-center
             shadow-md
             group-hover:scale-110
@@ -65,7 +66,8 @@ function StatCard({ title, value, icon: Icon, color }) {
             background: `linear-gradient(135deg, ${color} 0%, ${color}CC 100%)`,
           }}
         >
-          <Icon size={26} className="text-white" strokeWidth={2.2} />
+          <Icon size={22} className="text-white sm:hidden" strokeWidth={2.2} />
+          <Icon size={26} className="text-white hidden sm:block" strokeWidth={2.2} />
         </div>
       </div>
     </div>
