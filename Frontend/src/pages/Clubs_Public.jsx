@@ -39,26 +39,26 @@ function Clubs_Public() {
       <div className="flex">
         <Sidebar />
 
-        <main className="ml-72 w-full min-h-screen bg-[#FFF9F6] px-12 py-12">
+        <main className="w-full min-h-screen bg-[#FFF9F6] px-4 pt-20 pb-8 sm:px-6 sm:pt-24 sm:pb-10 md:ml-72 md:px-12 md:pt-12 md:pb-12">
           <ClubHeader clubCount={clubs.length} />
 
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:gap-8 xl:grid-cols-3">
               {Array.from({ length: 6 }).map((_, i) => (
                 <div
                   key={i}
-                  className="h-64 rounded-3xl animate-pulse"
+                  className="h-56 sm:h-64 rounded-3xl animate-pulse"
                   style={{ background: "rgba(201,182,228,0.15)" }}
                 />
               ))}
             </div>
           ) : clubs.length === 0 ? (
-            <div className="flex flex-col items-center justify-center text-center py-24">
+            <div className="flex flex-col items-center justify-center text-center py-16 sm:py-24 px-4">
               <div
                 className="w-16 h-16 rounded-full mb-5 opacity-70"
                 style={{ background: "radial-gradient(circle, #D9C6F0 0%, transparent 70%)" }}
               />
-              <h3 className="font-serif italic text-2xl text-[#2D2438] mb-2">
+              <h3 className="font-serif italic text-xl sm:text-2xl text-[#2D2438] mb-2">
                 No circles yet
               </h3>
               <p className="text-sm text-[#8B7BB5] max-w-sm">
@@ -70,7 +70,7 @@ function Clubs_Public() {
               variants={containerVariants}
               initial="hidden"
               animate="show"
-              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+              className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:gap-8 xl:grid-cols-3"
             >
               {clubs.map((club) => (
                 <ClubCard key={club.id} club={club} />
@@ -85,4 +85,4 @@ function Clubs_Public() {
   );
 }
 
-export default Clubs_Public;  
+export default Clubs_Public;

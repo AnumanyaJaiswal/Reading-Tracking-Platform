@@ -4,6 +4,7 @@ import { useState } from "react";
 import BookSelectionModal from "../Components/BookSelectionModal";
 import { createClub } from "../services/clubs";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 function CreateClub() {
     const [name, setName] = useState("");
@@ -83,27 +84,45 @@ function CreateClub() {
             <div className="flex">
                 <Sidebar />
 
-                <div className="ml-72 min-h-screen w-full bg-[#FFFDF8]">
+                <div className="md:ml-72 min-h-screen w-full bg-[#FFFDF8]">
 
-                    <div className="max-w-4xl mx-auto py-16 px-8">
+                    <div className="max-w-4xl mx-auto pt-24 pb-12 px-4 sm:pt-16 sm:pb-16 sm:px-6 md:pt-16 md:px-8">
+
+                        {/* Back button */}
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="
+                                flex items-center gap-2
+                                text-[#6B5A7A]
+                                hover:text-[#4C3D63]
+                                text-sm font-medium
+                                mb-4
+                                sm:mb-6
+                                transition
+                                cursor-pointer
+                            "
+                        >
+                            <ArrowLeft size={18} />
+                            Back
+                        </button>
 
                         <div
                             className="
-                             mt-10
+                             mt-6 sm:mt-10
                              bg-white/70
                               backdrop-blur-xl
-                             rounded-4xl
+                             rounded-3xl sm:rounded-4xl
                               shadow-xl
                              border border-white
-                             p-10
+                             p-5 sm:p-8 md:p-10
                          "
                         >
 
                             {/* Circle Name */}
 
-                            <div className="mb-8">
+                            <div className="mb-6 sm:mb-8">
 
-                                <label className="block text-lg font-semibold text-[#4C3D63] mb-2">
+                                <label className="block text-base sm:text-lg font-semibold text-[#4C3D63] mb-2">
                                     ✨ Circle Name
                                 </label>
 
@@ -117,8 +136,10 @@ function CreateClub() {
                                     rounded-2xl
                                     border
                                     border-[#E7D9FF]
-                                    px-5
-                                    py-4
+                                    px-4
+                                    py-3
+                                    sm:px-5
+                                    sm:py-4
                                     outline-none
                                     focus:ring-2
                                  focus:ring-[#B08DFF]
@@ -130,9 +151,9 @@ function CreateClub() {
 
                             {/* Description */}
 
-                            <div className="mb-8">
+                            <div className="mb-6 sm:mb-8">
 
-                                <label className="block text-lg font-semibold text-[#4C3D63] mb-2">
+                                <label className="block text-base sm:text-lg font-semibold text-[#4C3D63] mb-2">
                                     📜 Description
                                 </label>
 
@@ -146,8 +167,10 @@ function CreateClub() {
                                         rounded-2xl
                                         border
                                      border-[#E7D9FF]
-                                        px-5
-                                        py-4
+                                        px-4
+                                        py-3
+                                        sm:px-5
+                                        sm:py-4
                                         outline-none
                                         resize-none
                                         focus:ring-2
@@ -160,9 +183,9 @@ function CreateClub() {
 
                             {/* Cover Image */}
 
-                            <div className="mb-8">
+                            <div className="mb-6 sm:mb-8">
 
-                                <label className="block text-lg font-semibold text-[#4C3D63] mb-2">
+                                <label className="block text-base sm:text-lg font-semibold text-[#4C3D63] mb-2">
                                     🖼 Cover Image
                                 </label>
 
@@ -178,8 +201,10 @@ function CreateClub() {
                                         rounded-2xl
                                         border
                                         border-[#E7D9FF]
-                                        px-5
-                                        py-4
+                                        px-4
+                                        py-3
+                                        sm:px-5
+                                        sm:py-4
                                         outline-none
                                         focus:ring-2
                                         focus:ring-[#B08DFF]
@@ -191,9 +216,9 @@ function CreateClub() {
 
                             {/* Book */}
 
-                            <div className="mb-10">
+                            <div className="mb-8 sm:mb-10">
 
-                                <label className="block text-lg font-semibold text-[#4C3D63] mb-4">
+                                <label className="block text-base sm:text-lg font-semibold text-[#4C3D63] mb-4">
                                     📖 Current Book
                                 </label>
 
@@ -203,9 +228,14 @@ function CreateClub() {
                                         <div
                                             className="
                                             flex
-                                            items-center
+                                            flex-col
+                                            sm:flex-row
+                                            items-start
+                                            sm:items-center
                                             justify-between
-                                            p-5
+                                            gap-4
+                                            p-4
+                                            sm:p-5
                                             rounded-2xl
                                             bg-[#F8F2FF]                               
                                             border
@@ -218,16 +248,16 @@ function CreateClub() {
                                                 <img
                                                     src={selectedBook.thumbnail}
                                                     alt={selectedBook.title}
-                                                    className="w-20 rounded-xl shadow"
+                                                    className="w-16 sm:w-20 rounded-xl shadow shrink-0"
                                                 />
 
                                                 <div>
 
-                                                    <h3 className="text-lg font-semibold text-[#4C3D63]">
+                                                    <h3 className="text-base sm:text-lg font-semibold text-[#4C3D63]">
                                                         {selectedBook.title}
                                                     </h3>
 
-                                                    <p className="text-[#7C6A9A]">
+                                                    <p className="text-sm sm:text-base text-[#7C6A9A]">
                                                         {selectedBook.authors?.join(", ")}
                                                     </p>
 
@@ -238,6 +268,8 @@ function CreateClub() {
                                             <button
                                                 onClick={() => setShowBookModal(true)}
                                                 className="
+                                                w-full
+                                                sm:w-auto
                                                 px-4
                                                 py-2
                                                 rounded-xl
@@ -281,7 +313,8 @@ function CreateClub() {
                                 disabled={creating}
                                 className="
                                     w-full
-                                 py-4
+                                 py-3
+                                 sm:py-4
                                     rounded-2xl
                                     bg-linear-to-r
                                  from-[#B08DFF]
@@ -289,7 +322,8 @@ function CreateClub() {
                                  to-[#F6B6D1]
                                  text-white
                                  font-semibold
-                                    text-lg
+                                    text-base
+                                    sm:text-lg
                                     shadow-lg
                                     hover:scale-[1.02]
                                     transition

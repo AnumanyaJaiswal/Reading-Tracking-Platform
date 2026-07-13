@@ -65,16 +65,16 @@ function Home() {
           }}
         />
 
-        {/* Floating sparkles */}
+        {/* Floating sparkles — desktop only, decorative and positioned with fixed left offset that doesn't translate to mobile */}
         <motion.div
-          className="absolute top-20 right-1/3 pointer-events-none"
+          className="hidden md:block absolute top-20 right-1/3 pointer-events-none"
           animate={{ y: [0, -12, 0], opacity: [0.3, 0.8, 0.3] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
           <Sparkles size={18} style={{ color: "#C9B6E4" }} />
         </motion.div>
         <motion.div
-          className="absolute top-64 left-112 pointer-events-none"
+          className="hidden md:block absolute top-64 left-112 pointer-events-none"
           animate={{ y: [0, -8, 0], opacity: [0.2, 0.6, 0.2] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         >
@@ -85,12 +85,12 @@ function Home() {
         <Sidebar />
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col ml-72 relative z-10">
+        <div className="flex-1 flex flex-col ml-0 md:ml-72 relative z-10">
 
-          <main className="flex-1 max-w-3xl mx-auto w-full px-8 py-14">
+          <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-8 pt-20 sm:px-6 sm:py-10 md:px-8 md:py-14 md:pt-14">
 
             {loading ? (
-              <div className="text-center py-24" style={{ color: "#8B7BB5" }}>
+              <div className="text-center py-16 sm:py-24" style={{ color: "#8B7BB5" }}>
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
@@ -98,7 +98,7 @@ function Home() {
                 >
                   <Sparkles size={36} style={{ color: "#C9B6E4" }} strokeWidth={1.5} />
                 </motion.div>
-                Gathering stories from the shelves...
+                <span className="text-sm sm:text-base">Gathering stories from the shelves...</span>
               </div>
             ) : (
               <>
@@ -106,19 +106,20 @@ function Home() {
                   initial={{ opacity: 0, y: -12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="mb-12 relative"
+                  className="mb-8 sm:mb-12 relative"
                 >
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <motion.div
                       animate={{ rotate: [0, 15, -10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <Sparkles size={26} style={{ color: "#F6B6D1" }} strokeWidth={1.75} />
+                      <Sparkles size={22} className="sm:hidden" style={{ color: "#F6B6D1" }} strokeWidth={1.75} />
+                      <Sparkles size={26} className="hidden sm:block" style={{ color: "#F6B6D1" }} strokeWidth={1.75} />
                     </motion.div>
 
                     <h1
-                      className="text-4xl font-serif italic font-semibold"
+                      className="text-2xl sm:text-3xl md:text-4xl font-serif italic font-semibold"
                       style={{
                         background: "linear-gradient(120deg, #2D2438 0%, #8B7BB5 60%, #C9B6E4 100%)",
                         WebkitBackgroundClip: "text",
@@ -130,7 +131,7 @@ function Home() {
                     </h1>
                   </div>
 
-                  <p className="mt-2 ml-9 text-base italic" style={{ color: "#8B7BB5" }}>
+                  <p className="mt-2 ml-7 sm:ml-9 text-sm sm:text-base italic" style={{ color: "#8B7BB5" }}>
                     Discover what fellow readers are loving.
                   </p>
 

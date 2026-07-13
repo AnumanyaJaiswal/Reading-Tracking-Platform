@@ -7,7 +7,6 @@ import ClubHero from "../Components/Clubs/ClubHero";
 import ClubReadingProgress from "../Components/Clubs/ClubReadingProgress";
 import ClubDiscussionRoom from "../Components/Clubs/ClubDiscussionRoom";
 import MembersPreview from "../Components/Clubs/MembersPreview";
-
 import { getClubDetails, joinClub, leaveClub, getDiscussions, createDiscussion } from '../services/clubs'
 import { useAuth } from '../Context/AuthContext'
 

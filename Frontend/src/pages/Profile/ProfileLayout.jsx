@@ -11,20 +11,20 @@ function ProfileLayout() {
 
   return (
     <div>
-      <div className="min-h-screen bg-[#FFF9F6] flex flex-col ml-72">
+      <div className="min-h-screen bg-[#FFF9F6] flex flex-col ml-0 md:ml-72">
         <div className="flex flex-1">
-          <Sidebar />
+            <Sidebar />
 
-          <main className="flex-1 p-8 md:p-12 max-w-5xl mx-auto w-full">
+          <main className="flex-1 p-4 sm:p-6 md:p-12 max-w-5xl mx-auto w-full pt-20 md:pt-12">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="
                 relative
-                rounded-3xl
-                p-8 md:p-10
-                mb-8
+                rounded-2xl sm:rounded-3xl
+                p-5 sm:p-8 md:p-10
+                mb-6 sm:mb-8
                 bg-white/60
                 backdrop-blur-xl
                 border border-white/60
@@ -35,7 +35,9 @@ function ProfileLayout() {
                 {/* Avatar with gradient ring */}
                 <div
                   className="
-                    w-32 h-32
+                    w-24 h-24
+                    sm:w-28 sm:h-28
+                    md:w-32 md:h-32
                     rounded-full
                     p-0.75
                     shadow-[0_0_45px_rgba(176,141,255,0.4)]
@@ -54,32 +56,34 @@ function ProfileLayout() {
                       backdrop-blur-sm
                     "
                   >
-                    <span className="text-6xl font-serif font-bold text-[#4C3D63]">
+                    <span className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#4C3D63]">
                       {initial}
                     </span>
                   </div>
                 </div>
 
-                <h1 className="text-5xl md:text-6xl font-serif text-[#4C3D63] mt-6 tracking-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-6xl font-serif text-[#4C3D63] mt-4 sm:mt-6 tracking-tight">
                   {user.username}
                 </h1>
 
-                <p className="text-[#8C7AA8] mt-2 text-sm tracking-wide uppercase">
+                <p className="text-[#8C7AA8] mt-2 text-xs sm:text-sm tracking-wide uppercase">
                   Reader &middot; Storykeeper
                 </p>
 
                 {/* Tabs */}
                 <div
                   className="
-                    inline-flex
+                    flex flex-wrap
+                    justify-center
                     gap-1
                     p-1.5
-                    mt-8
+                    mt-6 sm:mt-8
                     rounded-full
                     bg-[#F4EDFF]/80
                     backdrop-blur-sm
                     border border-[#E9DBFF]
                     shadow-inner
+                    max-w-full
                   "
                 >
                   <ProfileTab to="/profile/stats" label="Stats" />

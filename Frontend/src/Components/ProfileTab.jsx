@@ -6,7 +6,8 @@ function ProfileTab({ to, label }) {
       to={to}
       className={({ isActive }) =>
         `
-        px-6 py-3
+        px-4 py-2 sm:px-6 sm:py-3
+        text-sm sm:text-base
         rounded-2xl
         font-medium
         transition-all duration-300
