@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
-import { Loader } from "lucide-react";
+import Loader from '../Components/Loader'
 
 function PublicRoute({ children }) {
     const { isAuthenticated, loading } = useAuth();

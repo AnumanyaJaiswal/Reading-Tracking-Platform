@@ -1,7 +1,7 @@
 import Sidebar from "../Components/Sidebar";
 import Footer from "../Components/Footer";
 import { useState } from "react";
-import BookSelectionModal from "../Components/BookSelectionModal";
+import BookSelectionModal from "../Components/Book/BookSelectionModal";
 import { createClub } from "../services/clubs";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";

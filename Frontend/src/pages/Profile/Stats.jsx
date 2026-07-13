@@ -8,8 +8,8 @@ import {
   FileText,
   Calendar,
 } from "lucide-react";
-import StatCard from '../../Components/StatCard';
-import AuthorsBreakdown from '../../Components/AuthorsBreakdown';
+import StatCard from '../../Components/Profile/StatCard';
+import AuthorsBreakdown from '../../Components/Profile/AuthorsBreakdown';
 
 function Stats() {
 

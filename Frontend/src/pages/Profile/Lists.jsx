@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getLists } from "../../services/lists";
-import LibrarySection from "../../Components/LibrarySection";
-import EditReviewModel from "../../Components/EditReviewModel";
+import LibrarySection from "../../Components/Profile/LibrarySection";
+import EditReviewModel from "../../Components/Reviews/EditReviewModel";
 import { updateReview } from "../../services/review";
 
 function Lists() {

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import Sidebar from '../Components/Sidebar'
 import Footer from '../Components/Footer'
-import ReviewFeed from "../Components/ReviewFeed";
+import ReviewFeed from "../Components/Reviews/ReviewFeed";
 import { getAllReviews } from "../services/review";
 
 function Home() {

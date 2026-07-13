@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
-import BookCard from "./BookCard";
+import BookCard from "../Book/BookCard";
 
 function LibrarySection({ title, books = [], type, onReview }) {
 

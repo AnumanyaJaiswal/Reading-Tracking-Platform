@@ -42,7 +42,7 @@ function ClubReadingProgress({ currentBook, readingProgress }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative overflow-hidden bg-white/50 backdrop-blur-xl rounded-[2rem] shadow-lg border border-white/60 p-8 md:p-10"
+            className="relative overflow-hidden bg-white/50 backdrop-blur-xl rounded-4xl shadow-lg border border-white/60 p-8 md:p-10"
         >
             {/* Decorative orbs */}
             <div
@@ -94,7 +94,7 @@ function ClubReadingProgress({ currentBook, readingProgress }) {
                     <img
                         src={currentBook.thumbnail}
                         alt={currentBook.title}
-                        className="relative w-36 sm:w-40 md:w-44 aspect-[2/3] object-cover rounded-xl"
+                        className="relative w-36 sm:w-40 md:w-44 aspect-2/3 object-cover rounded-xl"
                         style={{
                             boxShadow:
                                 "0 2px 6px rgba(45,36,56,0.12), 0 18px 32px -12px rgba(139,123,181,0.45)",

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "../../Components/Sidebar";
-import ProfileTab from "../../Components/ProfileTab";
+import ProfileTab from "../../Components/Profile/ProfileTab";
 import Footer from "../../Components/Footer";
 import { useAuth } from "../../Context/AuthContext";
 

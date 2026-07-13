@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ReviewCard from "../../Components/ReviewCard";
-import EditReviewModal from "../../Components/EditReviewModel";
+import ReviewCard from "../../Components/Reviews/ReviewCard";
+import EditReviewModal from "../../Components/Reviews/EditReviewModel";
 import { getMyReview, updateReview } from '../../services/review'
 
 function Reviews() {

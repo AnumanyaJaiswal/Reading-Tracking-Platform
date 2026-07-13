@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../Components/Sidebar'
 import Footer from '../Components/Footer'
 import SearchBar from "../Components/SearchBar";
-import BookGrid from "../components/BookGrid";
-import { useState } from "react";
+import BookGrid from "../components/Book/BookGrid";
 import { searchBooks } from "../services/books";
-import { useEffect } from "react";
 
 function Search() {
   const [query, setQuery] = useState("");

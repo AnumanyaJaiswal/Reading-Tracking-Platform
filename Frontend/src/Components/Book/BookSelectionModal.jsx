@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { searchBooks } from "../services/books";
+import { searchBooks } from "../../services/books";
 
 function BookSelectionModal({
     isOpen,
@@ -60,7 +60,7 @@ function BookSelectionModal({
                     bg-[#FFFDF8]
                     rounded-3xl
                     w-full
-                    max-w-[900px]
+                    max-w-225
                     max-h-[85vh]
                     overflow-y-auto
                     p-5

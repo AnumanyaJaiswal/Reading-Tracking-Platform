@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 import Sidebar from "../Components/Sidebar";
 import Footer from "../Components/Footer";
 
-import BookCover from "../Components/BookCover";
-import BookInfo from "../Components/BookInfo";
-import BookSynopsis from "../Components/BookSynopsis";
-import AddToListButton from "../Components/AddToListButton";
+import BookCover from "../Components/Book/BookCover";
+import BookInfo from "../Components/Book/BookInfo";
+import BookSynopsis from "../Components/Book/BookSynopsis";
+import AddToListButton from "../Components/Profile/AddToListButton";
 
 import { getBookById } from "../services/books";
 
@@ -149,7 +149,7 @@ function BookDetails() {
                                 mx-auto
                                 bg-white/60
                                 backdrop-blur-xl
-                                rounded-[28px] sm:rounded-[32px] md:rounded-[40px]
+                                rounded-[28px] sm:rounded-4xl md:rounded-[40px]
                                 shadow-2xl
                                 shadow-[#4C3D63]/10
                                 border
@@ -166,7 +166,7 @@ function BookDetails() {
 
                                         <div
                                             className="
-                                                aspect-2/3 w-full max-w-[220px] sm:max-w-[260px] lg:max-w-[320px]
+                                                aspect-2/3 w-full max-w-55 sm:max-w-65 lg:max-w-[320px]
                                                 rounded-2xl overflow-hidden
                                                 shadow-xl shadow-[#4C3D63]/15
                                                 border border-purple-100

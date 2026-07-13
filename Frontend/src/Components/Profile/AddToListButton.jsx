@@ -1,8 +1,8 @@
 import { useState } from "react";
 import AddToListModel from "./AddToListModel";
-import { addToList } from "../services/lists";
-import EditReviewModel from "./EditReviewModel";
-import { updateReview } from '../services/review'
+import { addToList } from "../../services/lists";
+import EditReviewModel from "../Reviews/EditReviewModel";
+import { updateReview } from '../../services/review'
 
 function AddToListButton({ book }) {
 
