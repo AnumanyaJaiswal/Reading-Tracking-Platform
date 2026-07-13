@@ -9,8 +9,9 @@ function ClubHero({ club, onJoin, onLeave }) {
             className="
                 relative
                 rounded-3xl
-                p-6
-                sm:p-10
+                p-5
+                sm:p-8
+                md:p-10
                 border
                 border-white/60
                 shadow-xl
@@ -32,64 +33,74 @@ function ClubHero({ club, onJoin, onLeave }) {
                 style={{ background: "radial-gradient(circle, #F6B6D1 0%, transparent 70%)" }}
             />
 
-            <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8">
+            <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 sm:gap-8">
 
                 {/* Left */}
 
-                <div>
+                <div className="min-w-0">
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-start sm:items-center gap-3 sm:gap-4">
 
                         <div
                             className="
-                                w-12
-                                h-12
-                                sm:w-14
-                                sm:h-14
+                                w-10
+                                h-10
+                                sm:w-12
+                                sm:h-12
+                                md:w-14
+                                md:h-14
                                 rounded-2xl
                                 flex
                                 items-center
                                 justify-center
                                 shadow-md
                                 shrink-0
+                                mt-1
+                                sm:mt-0
                             "
                             style={{
                                 background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",
                             }}
                         >
-                            <Crown size={24} className="text-white" strokeWidth={2} />
+                            <Crown size={20} className="text-white sm:hidden" strokeWidth={2} />
+                            <Crown size={24} className="text-white hidden sm:block" strokeWidth={2} />
                         </div>
 
-                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif italic font-bold text-[#2D2438] tracking-tight">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic font-bold text-[#2D2438] tracking-tight leading-tight wrap-break-words">
                             {club.name}
                         </h1>
 
                     </div>
 
-                    <p className="mt-5 text-base sm:text-lg text-[#6B5A7A] max-w-3xl leading-relaxed">
+                    <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-[#6B5A7A] max-w-3xl leading-relaxed">
                         {club.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-3 mt-8">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 mt-6 sm:mt-8">
 
                         <div
                             className="
                                 flex
                                 items-center
-                                gap-2
-                                px-4
-                                py-2
+                                gap-1.5
+                                sm:gap-2
+                                px-3
+                                sm:px-4
+                                py-1.5
+                                sm:py-2
                                 rounded-full
                                 bg-white/60
                                 border
                                 border-white/70
                                 text-[#4C3D63]
-                                text-sm
+                                text-xs
+                                sm:text-sm
                                 font-medium
                                 shadow-sm
                             "
                         >
-                            <Users size={16} className="text-[#8B7BB5]" />
+                            <Users size={14} className="text-[#8B7BB5] sm:hidden" />
+                            <Users size={16} className="text-[#8B7BB5] hidden sm:block" />
                             <span>{club.memberCount} Members</span>
                         </div>
 
@@ -97,41 +108,52 @@ function ClubHero({ club, onJoin, onLeave }) {
                             className="
                                 flex
                                 items-center
-                                gap-2
-                                px-4
-                                py-2
+                                gap-1.5
+                                sm:gap-2
+                                px-3
+                                sm:px-4
+                                py-1.5
+                                sm:py-2
                                 rounded-full
                                 bg-white/60
                                 border
                                 border-white/70
                                 text-[#4C3D63]
-                                text-sm
+                                text-xs
+                                sm:text-sm
                                 font-medium
                                 shadow-sm
+                                max-w-full
                             "
                         >
-                            <Crown size={16} className="text-[#8B7BB5]" />
-                            <span>{club.owner.username}</span>
+                            <Crown size={14} className="text-[#8B7BB5] shrink-0 sm:hidden" />
+                            <Crown size={16} className="text-[#8B7BB5] shrink-0 hidden sm:block" />
+                            <span className="truncate">{club.owner.username}</span>
                         </div>
 
                         <div
                             className="
                                 flex
                                 items-center
-                                gap-2
-                                px-4
-                                py-2
+                                gap-1.5
+                                sm:gap-2
+                                px-3
+                                sm:px-4
+                                py-1.5
+                                sm:py-2
                                 rounded-full
                                 bg-white/60
                                 border
                                 border-white/70
                                 text-[#4C3D63]
-                                text-sm
+                                text-xs
+                                sm:text-sm
                                 font-medium
                                 shadow-sm
                             "
                         >
-                            <Calendar size={16} className="text-[#8B7BB5]" />
+                            <Calendar size={14} className="text-[#8B7BB5] shrink-0 sm:hidden" />
+                            <Calendar size={16} className="text-[#8B7BB5] shrink-0 hidden sm:block" />
                             <span>
                                 Created{" "}
                                 {new Date(club.createdAt).toLocaleDateString()}
@@ -155,17 +177,22 @@ function ClubHero({ club, onJoin, onLeave }) {
                             className="
                                 w-full
                                 lg:w-auto
-                                px-8
-                                py-4
+                                px-6
+                                sm:px-8
+                                py-3.5
+                                sm:py-4
                                 rounded-2xl
                                 bg-white/80
                                 border
                                 border-[#DCCEFF]
                                 text-[#4C3D63]
                                 font-semibold
+                                text-sm
+                                sm:text-base
                                 shadow-sm
                                 hover:bg-white
                                 transition
+                                cursor-pointer
                             "
                         >
                             Leave Club
@@ -180,13 +207,18 @@ function ClubHero({ club, onJoin, onLeave }) {
                             className="
                                 w-full
                                 lg:w-auto
-                                px-8
-                                py-4
+                                px-6
+                                sm:px-8
+                                py-3.5
+                                sm:py-4
                                 rounded-2xl
                                 text-white
                                 font-semibold
+                                text-sm
+                                sm:text-base
                                 shadow-md
                                 transition
+                                cursor-pointer
                             "
                             style={{
                                 background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",

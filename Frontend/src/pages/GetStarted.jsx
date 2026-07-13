@@ -210,6 +210,7 @@ function GetStarted() {
           ring-inset
           ring-[#E7C66D]/70
           shadow-md
+          cursor-pointer
         "
         onClick={() => navigate('/login')}
         >

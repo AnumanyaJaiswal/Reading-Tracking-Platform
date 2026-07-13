@@ -215,6 +215,7 @@ function ClubDetails() {
                     shadow-sm
                     hover:text-[#4C3D63]
                     transition-colors
+                    cursor-pointer
                 "
                 style={{ background: "rgba(255,255,255,0.5)" }}
             >

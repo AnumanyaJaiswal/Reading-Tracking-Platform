@@ -8,7 +8,7 @@ export const getAllClubs = async () => {
 
 // Get clubs joined by current user
 export const getMyClubs = async () => {
-    const data = await api("/clubs/my-clubs");
+    const data = await api("/clubs/myclubs");
     return data.clubs;
 };
 

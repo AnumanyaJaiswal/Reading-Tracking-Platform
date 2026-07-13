@@ -343,9 +343,11 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                     relative
                     border-t
                     border-white/60
-                    p-5
+                    p-3
+                    sm:p-5
                     flex
-                    gap-3
+                    gap-2
+                    sm:gap-3
                     items-center
                 "
                 style={{
@@ -364,8 +366,11 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                     placeholder="Share your thoughts about this book..."
                     className="
                         flex-1
-                        px-5
-                        py-3
+                        min-w-0
+                        px-4
+                        sm:px-5
+                        py-2.5
+                        sm:py-3
                         rounded-2xl
                         bg-white/70
                         border
@@ -385,8 +390,11 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                     onClick={handleSend}
                     disabled={!message.trim() || isSending}
                     className="
-                        px-6
-                        py-3
+                        shrink-0
+                        px-4
+                        sm:px-6
+                        py-2.5
+                        sm:py-3
                         rounded-2xl
                         text-white
                         flex
@@ -398,7 +406,8 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                         disabled:opacity-70
                         disabled:cursor-not-allowed
                         transition
-                        w-26
+                        w-14
+                        sm:w-26
                     "
                     style={{
                         background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",
@@ -426,7 +435,7 @@ function ClubDiscussionRoom({ discussions, onPost, currentUserId }) {
                                 className="flex items-center justify-center gap-2"
                             >
                                 <Send size={18} />
-                                Send
+                                <span className="hidden sm:inline">Send</span>
                             </motion.span>
                         )}
                     </AnimatePresence>

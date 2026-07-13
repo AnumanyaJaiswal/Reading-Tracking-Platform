@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 
 function ClubHeader({ clubCount = 0 }) {
   const navigate = useNavigate();
@@ -25,9 +26,29 @@ function ClubHeader({ clubCount = 0 }) {
           <p className="tracking-[0.3em] text-xs uppercase text-[#8B7BB5] font-medium mb-2">
             Gather · Read · Discuss
           </p>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#2D2438]">
-            ✨Reading Circles
-          </h1>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <motion.div
+              animate={{ rotate: [0, 15, -10, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Sparkles size={24} className="sm:hidden" style={{ color: "#F6B6D1" }} strokeWidth={1.75} />
+              <Sparkles size={30} className="hidden sm:block" style={{ color: "#F6B6D1" }} strokeWidth={1.75} />
+            </motion.div>
+
+            <h1
+              className="font-serif italic font-semibold text-3xl sm:text-4xl md:text-5xl"
+              style={{
+                background: "linear-gradient(120deg, #2D2438 0%, #8B7BB5 60%, #C9B6E4 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Reading Circles
+            </h1>
+          </div>
+
           <p className="text-[#6B5F7A] mt-3 max-w-md text-sm leading-relaxed">
             Small circles of readers moving through the same stories, at the same time.
             Find one that matches your rhythm, or start your own.
@@ -44,7 +65,7 @@ function ClubHeader({ clubCount = 0 }) {
 
           <button
             onClick={() => navigate("/clubs/new")}
-            className="px-5 py-2.5 rounded-full text-sm font-medium text-white shadow-lg shadow-[#B8A6D9]/30 hover:shadow-[#B8A6D9]/50 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap"
+            className="px-5 py-2.5 rounded-full text-sm font-medium text-white shadow-lg shadow-[#B8A6D9]/30 hover:shadow-[#B8A6D9]/50 hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap cursor-pointer"
             style={{
               background: "linear-gradient(135deg, #B8A6D9 0%, #8B7BB5 100%)",
             }}

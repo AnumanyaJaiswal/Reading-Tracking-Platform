@@ -81,7 +81,7 @@ function ClubCard({ club, onJoin }) {
           <motion.button
             whileHover={{ scale: 1.03 }}
             onClick={() => navigate(`/clubs/${club.id}`)}
-            className="text-xs font-medium px-4 py-2 rounded-full text-white shadow-md"
+            className="text-xs font-medium px-4 py-2 rounded-full text-white shadow-md cursor-pointer"
             style={{ background: `linear-gradient(135deg, ${auraEnd}, #6B5F9A)` }}
           >
             Enter Circle →
