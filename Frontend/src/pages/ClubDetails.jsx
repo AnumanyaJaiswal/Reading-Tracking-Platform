@@ -7,7 +7,7 @@ import ClubHero from "../Components/Clubs/ClubHero";
 import ClubReadingProgress from "../Components/Clubs/ClubReadingProgress";
 import ClubDiscussionRoom from "../Components/Clubs/ClubDiscussionRoom";
 import MembersPreview from "../Components/Clubs/MembersPreview";
-import { getClubDetails, joinClub, leaveClub, getDiscussions, createDiscussion } from '../services/clubs'
+import { getClubDetails, joinClub, leaveClub, getDiscussions, createDiscussion, deleteClub } from '../services/clubs'
 import { useAuth } from '../Context/AuthContext'
 
 import socket from "../socket";
@@ -37,7 +37,6 @@ function SectionDivider({ label }) {
 }
 
 // Slow-drifting decorative orbs, fixed to the viewport so the whole
-// page feels alive without ever competing with the content.
 function AmbientBackdrop() {
     return (
         <>
@@ -176,6 +175,16 @@ function ClubDetails() {
         }
     }
 
+    //On deleting
+    const handleDelete = async()=>{
+        try {
+            await deleteClub(club.id);
+            navigate(-1);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handlePostDiscussion = async (message) => {
         socket.emit("sendDiscussion",
             {
@@ -232,6 +241,8 @@ function ClubDetails() {
                     club={club}
                     onJoin={handleJoin}
                     onLeave={handleLeave}
+                    onDelete={handleDelete}
+                    isOwner={club?.owner.id === user.id}
                 />
             </motion.div>
 

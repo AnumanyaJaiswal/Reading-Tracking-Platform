@@ -11,65 +11,45 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [authLoading, setAuthLoading] = useState(true); // only for initial hydration
     const navigate = useNavigate();
 
     const login = async (credentials) => {
-        try {
-            setLoading(true);
-            const data = await loginUser(credentials);
-
-            setUser(data.user);
-
-            return data;
-        } catch (error) {
-            throw error;
-        } finally {
-            setLoading(false)
-        }
+        // no setLoading(true) here — this is a local, per-form concern now
+        const data = await loginUser(credentials);
+        setUser(data.user);
+        return data;
+        // let errors propagate — no try/catch needed here unless you want side effects
     }
 
     const register = async (userData) => {
-        try {
-            setLoading(true);
-            const data = await signupUser(userData);
-            setUser(data.user);
-            return data;
-        } catch (error) {
-            throw error;
-        } finally {
-            setLoading(false)
-        }
+        const data = await signupUser(userData);
+        setUser(data.user);
+        return data;
     }
 
     const logout = async () => {
-        try {
-            await logoutUser();
-            setUser(null);
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
+        await logoutUser();
+        setUser(null);
     }
 
     useEffect(() => {
-    const checkAuth = async () => {
-        try {
-            const data = await getCurrentUser();
-            setUser(data.user);
-        } catch (error) {
-            setUser(null);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    checkAuth();
-}, []);
+        const checkAuth = async () => {
+            try {
+                const data = await getCurrentUser();
+                setUser(data.user);
+            } catch (error) {
+                setUser(null);
+            } finally {
+                setAuthLoading(false);
+            }
+        };
+        checkAuth();
+    }, []);
 
     const value = {
         user,
-        loading,
+        loading: authLoading, // PublicRoute/PrivateRoute only ever see this
         login,
         register,
         logout,

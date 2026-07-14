@@ -1,7 +1,7 @@
 import { Crown, Users, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 
-function ClubHero({ club, onJoin, onLeave }) {
+function ClubHero({ club, onJoin, onLeave, onDelete, isOwner }) {
     if (!club) return null;
 
     return (
@@ -168,7 +168,35 @@ function ClubHero({ club, onJoin, onLeave }) {
 
                 <div className="flex flex-col gap-4 w-full lg:w-auto">
 
-                    {club.joined ? (
+                    {isOwner ? (
+
+                        <motion.button
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            onClick={onDelete}
+                            className="
+                                w-full
+                                lg:w-auto
+                                px-6
+                                sm:px-8
+                                py-3.5
+                                sm:py-4
+                                rounded-2xl
+                                bg-red-500
+                                text-white
+                                font-semibold
+                                text-sm
+                                sm:text-base
+                                shadow-md
+                                hover:bg-red-600
+                                transition
+                                cursor-pointer
+                            "
+                        >
+                            Delete Club
+                        </motion.button>
+
+                    ) : club.joined ? (
 
                         <motion.button
                             whileHover={{ scale: 1.03 }}
@@ -187,8 +215,6 @@ function ClubHero({ club, onJoin, onLeave }) {
                                 border-[#DCCEFF]
                                 text-[#4C3D63]
                                 font-semibold
-                                text-sm
-                                sm:text-base
                                 shadow-sm
                                 hover:bg-white
                                 transition
@@ -214,14 +240,13 @@ function ClubHero({ club, onJoin, onLeave }) {
                                 rounded-2xl
                                 text-white
                                 font-semibold
-                                text-sm
-                                sm:text-base
                                 shadow-md
                                 transition
                                 cursor-pointer
                             "
                             style={{
-                                background: "linear-gradient(135deg, #B08DFF 0%, #8B7BB5 100%)",
+                                background:
+                                    "linear-gradient(135deg,#B08DFF 0%,#8B7BB5 100%)"
                             }}
                         >
                             Join Club

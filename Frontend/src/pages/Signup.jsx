@@ -5,16 +5,18 @@ import { useAuth } from '../Context/AuthContext'
 function Signup() {
 
     const navigate = useNavigate();
-    const { register, loading } = useAuth();
+    const { register } = useAuth();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState("");
+    const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
+        setSubmitting(true);
         try {
-            setError("");
 
             await register({
                 username: username.trim(),
@@ -27,6 +29,8 @@ function Signup() {
 
             setError(error.message);
 
+        } finally {
+            setSubmitting(false);
         }
     }
 
@@ -208,7 +212,7 @@ function Signup() {
 
                     <button
                         type="submit"
-                        disabled={loading}
+                        disabled={submitting}
 
                         className="
                         w-full
@@ -225,7 +229,7 @@ function Signup() {
                         to-[#E7C66D]
                     "
                     >
-                        {loading ? "Creating Account..." : "✦ Begin Your Journey"}
+                        {submitting ? "Creating Account..." : "✦ Begin Your Journey"}
                     </button>
 
                 </form>

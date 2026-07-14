@@ -1,34 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../Context/AuthContext'
 
 
 function Login() {
     const navigate = useNavigate()
-    const { login, loading } = useAuth()
+    const { login } = useAuth()
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState("");
+    const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setError("");
+        setSubmitting(true);
         try {
-
-            setError("");
-
-            await login({
-                email: email.trim(),
-                password,
-            });
-
+            await login({ email: email.trim(), password });
             navigate("/profile");
-
-        } catch (error) {
-
-            setError(error.message);
-
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -54,6 +48,30 @@ function Login() {
                 shadow-[0_10px_30px_rgba(176,141,255,0.10)]
                 p-8
             ">
+
+                {
+                    error && (
+                        <div
+                            className="
+                            mb-6
+                            px-4
+                            py-3
+                            rounded-2xl
+                            bg-red-50
+                            border
+                            border-red-200
+                            text-red-600
+                            text-sm
+                            text-center
+                            font-medium
+                            animate-pulse
+                        "
+                        >
+                            ✦ {error}
+                        </div>
+                    )
+                }
+
                 <div className="text-center mb-8">
 
                     <div className="text-4xl mb-3">
@@ -157,17 +175,10 @@ function Login() {
                             "
                         />
                     </div>
-                    {
-                        error && (
-                            <p className="text-red-500 text-sm text-center">
-                                {error}
-                            </p>
-                        )
-                    }
 
                     <button
                         type='submit'
-                        disabled={loading}
+                        disabled={submitting}
                         className="
                             w-full
                             py-3
@@ -183,7 +194,7 @@ function Login() {
                         "
                     >
                         {
-                            loading
+                            submitting
                                 ? "Entering Prophecy..."
                                 : "✦ Return to Prophecy"
                         }
