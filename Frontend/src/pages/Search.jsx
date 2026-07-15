@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 import Sidebar from '../Components/Sidebar'
 import Footer from '../Components/Footer'
 import SearchBar from "../Components/SearchBar";
-import BookGrid from "../components/Book/BookGrid";
+import BookGrid from "../Components/Book/BookGrid";
 import { searchBooks } from "../services/books";
 
 function BookSkeletonCard() {
