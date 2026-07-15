@@ -1,7 +1,7 @@
 const prisma = require('../config/db')
 const {
     createDiscussion
-} = require("../services/discussionservice");
+} = require("../services/discussionService");
 
 module.exports = (io, socket) => {
 
