@@ -17,6 +17,11 @@ const setupSocket = require('./src/socket')
 
 const PORT = process.env.PORT || 8000;
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:4173",
+];
+
 //For socket.io
 const http = require("http");
 const { Server } = require("socket.io");
@@ -26,7 +31,7 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
   cors:{
-      origin: process.env.FRONTEND_URL,
+      origin: allowedOrigins,
       credentials:true
   }
 })
@@ -53,7 +58,16 @@ connectDB();
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin(origin, callback) {
+      // Allow requests with no Origin (Postman, curl, etc.)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );

@@ -54,7 +54,7 @@ function ReviewCard({ book, onEdit }) {
                     }}
                 />
 
-                {/* Edit button, floating */}
+                {/* Edit button — always visible on phone, hover-reveal on desktop */}
                 <button
                     onClick={() => onEdit(book)}
                     className="
@@ -68,8 +68,10 @@ function ReviewCard({ book, onEdit }) {
                         justify-center
                         rounded-full
                         text-white
-                        opacity-0
-                        group-hover:opacity-100
+                        opacity-100
+                        sm:opacity-0
+                        sm:group-hover:opacity-100
+                        active:scale-95
                         hover:scale-110
                         transition-all
                         duration-200

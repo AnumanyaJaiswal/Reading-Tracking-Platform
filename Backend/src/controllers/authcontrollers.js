@@ -16,7 +16,6 @@ const registerUser = async (req, res) => {
 
         //Password Hasing
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log(hashedPassword);
 
         //Check Existing User Query
         const existingUser = await prisma.user.findFirst({

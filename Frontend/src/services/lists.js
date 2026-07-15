@@ -10,6 +10,5 @@ export const addToList = async(book) =>{
         method: "POST",
         body: JSON.stringify(book),
     })
-  console.log(response.book);
   return response.book
 }

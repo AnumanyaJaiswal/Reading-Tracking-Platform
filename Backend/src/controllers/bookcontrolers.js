@@ -28,7 +28,6 @@ const SearchBookController = async(req, res) =>{
 const GetBookController = async(req, res) =>{
     try {
         const id = req.params.id;
-        console.log("Book ID:", id);
 
         // get a particular book by its id
         const book = await getBookById(id);

@@ -76,7 +76,6 @@ function ClubDetails() {
         const fetchClub = async () => {
             try {
                 const data = await getClubDetails(clubId);
-                console.log(data)
                 setClub(data);
                 const discussionData = await getDiscussions(clubId);
                 setDiscussions(discussionData)

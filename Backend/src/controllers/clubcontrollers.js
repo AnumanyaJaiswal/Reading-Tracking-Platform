@@ -4,7 +4,6 @@ const { uploadImage } = require("../services/cloudinaryservice");
 
 const createClubController = async (req, res) => {
     try {
-        console.log(req.user);
         const ownerId = req.user.id;
 
         const {

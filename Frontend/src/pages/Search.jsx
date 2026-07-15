@@ -76,7 +76,6 @@ function Search() {
     try {
       setLoading(true);
       const books = await searchBooks(query);
-      console.log("Books found:", books);
       setBooks(books);
     } catch (error) {
       console.error("Error searching books:", error);
